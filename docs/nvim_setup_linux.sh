@@ -3,7 +3,7 @@ set -exu
 set -o pipefail
 
 # Whether python3 has been installed on the system
-PYTHON_INSTALLED=true
+PYTHON_INSTALLED=false
 
 # If Python has been installed, then we need to know whether Python is provided
 # by the system, or you have already installed Python under your HOME.
@@ -13,30 +13,23 @@ SYSTEM_PYTHON=false
 # Anaconda (INSTALL_ANACONDA=true) or Miniconda (INSTALL_ANACONDA=false)
 INSTALL_ANACONDA=false
 
-# Whether to add the path of the installed executables to system PATH
-ADD_TO_SYSTEM_PATH=true
-
-# select which shell we are using
-USE_ZSH_SHELL=true
-USE_BASH_SHELL=false
-
-if [[ ! -d "$HOME/packages/" ]]; then
-    mkdir -p "$HOME/packages/"
+if [[ ! -d "$HOME/.local/packages/" ]]; then
+    mkdir -p "$HOME/.local/packages/"
 fi
 
-if [[ ! -d "$HOME/tools/" ]]; then
-    mkdir -p "$HOME/tools/"
+if [[ ! -d "$HOME/.local/tools/" ]]; then
+    mkdir -p "$HOME/.local/tools/"
 fi
 
 #######################################################################
 #                    Anaconda or miniconda install                    #
 #######################################################################
 if [[ "$INSTALL_ANACONDA" = true ]]; then
-    CONDA_DIR=$HOME/tools/anaconda
+    CONDA_DIR=$HOME/.local/tools/anaconda
     CONDA_NAME=Anaconda.sh
     CONDA_LINK="https://mirrors.tuna.tsinghua.edu.cn/anaconda/archive/Anaconda3-2021.11-Linux-x86_64.sh"
 else
-    CONDA_DIR=$HOME/tools/miniconda
+    CONDA_DIR=$HOME/.local/tools/miniconda
     CONDA_NAME=Miniconda.sh
     CONDA_LINK="https://mirrors.tuna.tsinghua.edu.cn/anaconda/miniconda/Miniconda3-py39_4.10.3-Linux-x86_64.sh"
 fi
@@ -48,20 +41,19 @@ if [[ ! "$PYTHON_INSTALLED" = true ]]; then
 
     echo "Downloading and installing conda"
 
-    if [[ ! -f "$HOME/packages/$CONDA_NAME" ]]; then
-        curl -Lo "$HOME/packages/$CONDA_NAME" $CONDA_LINK
+    if [[ ! -f "$HOME/.local/packages/$CONDA_NAME" ]]; then
+        curl -Lo "$HOME/.local/packages/$CONDA_NAME" $CONDA_LINK
     fi
 
     # Install conda silently
     if [[ -d $CONDA_DIR ]]; then
         rm -rf "$CONDA_DIR"
     fi
-    bash "$HOME/packages/$CONDA_NAME" -b -p "$CONDA_DIR"
+    bash "$HOME/.local/packages/$CONDA_NAME" -b -p "$CONDA_DIR"
 
     # Setting up environment variables
-    if [[ "$ADD_TO_SYSTEM_PATH" = true ]] && [[ "$USE_BASH_SHELL" = true ]]; then
-        echo "export PATH=\"$CONDA_DIR/bin:\$PATH\"" >> "$HOME/.bash_profile"
-    fi
+    sed -i "\:"$CONDA_DIR/bin":d" "$HOME/.bashrc"
+    echo "export PATH=\"$CONDA_DIR/bin:\$PATH\"" >> "$HOME/.bashrc"
 else
     echo "Python is already installed. Skip installing it."
 fi
@@ -89,30 +81,28 @@ fi
 #######################################################################
 #                Install node and js-based language server            #
 #######################################################################
-NODE_DIR=$HOME/tools/nodejs
-NODE_SRC_NAME=$HOME/packages/nodejs.tar.gz
+NODE_DIR=$HOME/.local/tools/nodejs
+NODE_SRC_NAME=$HOME/.local/packages/nodejs.tar.gz
 # when download speed is slow, we can also use its mirror site: https://mirrors.ustc.edu.cn/node/v15.0.0/
 NODE_LINK="https://mirrors.ustc.edu.cn/node/v15.0.0/node-v15.0.0-linux-x64.tar.xz"
-if [[ -z "$(command -v node)" ]]; then
-    echo "Install Node.js"
-    if [[ ! -f $NODE_SRC_NAME ]]; then
-        echo "Downloading Node.js and renaming"
-        wget $NODE_LINK -O "$NODE_SRC_NAME"
-    fi
 
-    if [[ ! -d "$NODE_DIR" ]]; then
-        echo "Creating Node.js directory under tools directory"
-        mkdir -p "$NODE_DIR"
-        echo "Extracting to $HOME/tools/nodejs directory"
-        tar xvf "$NODE_SRC_NAME" -C "$NODE_DIR" --strip-components 1
-    fi
-
-    if [[ "$ADD_TO_SYSTEM_PATH" = true ]] && [[ "$USE_BASH_SHELL" = true ]]; then
-        echo "export PATH=\"$NODE_DIR/bin:\$PATH\"" >> "$HOME/.bash_profile"
-    fi
-else
-    echo "Node.js is already installed. Skip installing it."
+echo "Install Node.js"
+if [[ ! -f $NODE_SRC_NAME ]]; then
+    echo "Downloading Node.js and renaming"
+    wget $NODE_LINK -O "$NODE_SRC_NAME"
 fi
+
+if [[ ! -d "$NODE_DIR" ]]; then
+    echo "Creating Node.js directory under tools directory"
+    mkdir -p "$NODE_DIR"
+    echo "Extracting to $HOME/.local/tools/nodejs directory"
+    tar xvf "$NODE_SRC_NAME" -C "$NODE_DIR" --strip-components 1
+fi
+
+sed -i "\:"$NODE_DIR/bin":d" "$HOME/.bashrc"
+echo "export PATH=\"$NODE_DIR/bin:\$PATH\"" >> "$HOME/.bashrc"
+
+source "$HOME/.bashrc"
 
 # Install vim-language-server
 "$NODE_DIR/bin/npm" install -g vim-language-server
@@ -123,8 +113,8 @@ fi
 #######################################################################
 #                            Ripgrep part                             #
 #######################################################################
-RIPGREP_DIR=$HOME/tools/ripgrep
-RIPGREP_SRC_NAME=$HOME/packages/ripgrep.tar.gz
+RIPGREP_DIR=$HOME/.local/tools/ripgrep
+RIPGREP_SRC_NAME=$HOME/.local/packages/ripgrep.tar.gz
 RIPGREP_LINK="https://github.com/BurntSushi/ripgrep/releases/download/12.0.0/ripgrep-12.0.0-x86_64-unknown-linux-musl.tar.gz"
 if [[ -z "$(command -v rg)" ]] && [[ ! -f "$RIPGREP_DIR/rg" ]]; then
     echo "Install ripgrep"
@@ -136,24 +126,19 @@ if [[ -z "$(command -v rg)" ]] && [[ ! -f "$RIPGREP_DIR/rg" ]]; then
     if [[ ! -d "$RIPGREP_DIR" ]]; then
         echo "Creating ripgrep directory under tools directory"
         mkdir -p "$RIPGREP_DIR"
-        echo "Extracting to $HOME/tools/ripgrep directory"
+        echo "Extracting to $HOME/.local/tools/ripgrep directory"
         tar zxvf "$RIPGREP_SRC_NAME" -C "$RIPGREP_DIR" --strip-components 1
     fi
 
-    if [[ "$ADD_TO_SYSTEM_PATH" = true ]] && [[ "$USE_BASH_SHELL" = true ]]; then
-        echo "export PATH=\"$RIPGREP_DIR:\$PATH\"" >> "$HOME/.bash_profile"
-    fi
+    sed -i "\:"$RIPGREP_DIR":d" "$HOME/.bashrc"
+    echo "export PATH=\"$RIPGREP_DIR:\$PATH\"" >> "$HOME/.bashrc"
 
     # set up manpath and zsh completion for ripgrep
-    mkdir -p $HOME/tools/ripgrep/doc/man/man1
-    mv $HOME/tools/ripgrep/doc/rg.1 $HOME/tools/ripgrep/doc/man/man1
+    mkdir -p $HOME/.local/tools/ripgrep/doc/man/man1
+    mv $HOME/.local/tools/ripgrep/doc/rg.1 $HOME/.local/tools/ripgrep/doc/man/man1
 
-    if [[ "$USE_BASH_SHELL" = true ]]; then
-        echo 'export MANPATH=$HOME/tools/ripgrep/doc/man:$MANPATH' >> "$HOME/.bash_profile"
-    else
-        echo 'export MANPATH=$HOME/tools/ripgrep/doc/man:$MANPATH' >> "$HOME/.zshrc"
-        echo 'export FPATH=$HOME/tools/ripgrep/complete:$FPATH' >> "$HOME/.zshrc"
-    fi
+    sed -i "\:"$HOME/.local/tools/ripgrep/doc/man":d" "$HOME/.bashrc"
+    echo "export MANPATH=$HOME/.local/tools/ripgrep/doc/man:$MANPATH" >> "$HOME/.bashrc"
 else
     echo "ripgrep is already installed. Skip installing it."
 fi
@@ -161,8 +146,8 @@ fi
 #######################################################################
 #                            Ctags install                            #
 #######################################################################
-CTAGS_SRC_DIR=$HOME/packages/ctags
-CTAGS_DIR=$HOME/tools/ctags
+CTAGS_SRC_DIR=$HOME/.local/packages/ctags
+CTAGS_DIR=$HOME/.local/tools/ctags
 CTAGS_LINK="https://github.com/universal-ctags/ctags.git"
 if [[ ! -f "$CTAGS_DIR/bin/ctags" ]]; then
     echo "Install ctags"
@@ -178,9 +163,8 @@ if [[ ! -f "$CTAGS_DIR/bin/ctags" ]]; then
     ./autogen.sh && ./configure --prefix="$CTAGS_DIR"
     make -j && make install
 
-    if [[ "$ADD_TO_SYSTEM_PATH" = true ]] && [[ "$USE_BASH_SHELL" = true ]]; then
-        echo "export PATH=\"$CTAGS_DIR/bin:\$PATH\"" >> "$HOME/.bash_profile"
-    fi
+    sed -i "\:"$CTAGS_DIR/bin":d" "$HOME/.bashrc"
+    echo "export PATH=\"$CTAGS_DIR/bin:\$PATH\"" >> "$HOME/.bashrc"
 else
     echo "ctags is already installed. Skip installing it."
 fi
@@ -188,8 +172,8 @@ fi
 #######################################################################
 #                                Nvim install                         #
 #######################################################################
-NVIM_DIR=$HOME/tools/nvim
-NVIM_SRC_NAME=$HOME/packages/nvim-linux64.tar.gz
+NVIM_DIR=$HOME/.local/tools/nvim
+NVIM_SRC_NAME=$HOME/.local/packages/nvim-linux64.tar.gz
 NVIM_CONFIG_DIR=$HOME/.config/nvim
 NVIM_LINK="https://github.com/neovim/neovim/releases/download/stable/nvim-linux64.tar.gz"
 if [[ ! -f "$NVIM_DIR/bin/nvim" ]]; then
@@ -207,9 +191,8 @@ if [[ ! -f "$NVIM_DIR/bin/nvim" ]]; then
     echo "Extracting neovim"
     tar zxvf "$NVIM_SRC_NAME" --strip-components 1 -C "$NVIM_DIR"
 
-    if [[ "$ADD_TO_SYSTEM_PATH" = true ]] && [[ "$USE_BASH_SHELL" = true ]]; then
-        echo "export PATH=\"$NVIM_DIR/bin:\$PATH\"" >> "$HOME/.bash_profile"
-    fi
+    sed -i "\:"$NVIM_DIR/bin":d" "$HOME/.bashrc"
+    echo "export PATH=\"$NVIM_DIR/bin:\$PATH\"" >> "$HOME/.bashrc"
 else
     echo "Nvim is already installed. Skip installing it."
 fi
@@ -219,7 +202,7 @@ if [[ -d "$NVIM_CONFIG_DIR" ]]; then
     mv "$NVIM_CONFIG_DIR" "$NVIM_CONFIG_DIR.backup"
 fi
 
-git clone --depth=1 https://github.com/jdhao/nvim-config.git "$NVIM_CONFIG_DIR"
+git clone --depth=1 https://github.com/hanxi/nvim-config.git "$NVIM_CONFIG_DIR"
 
 echo "Installing packer.nvim"
 git clone --depth=1 https://github.com/wbthomason/packer.nvim \
