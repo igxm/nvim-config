@@ -171,7 +171,7 @@ fi
 
 # install clangd
 sudo bash -c "$(wget -O - https://apt.llvm.org/llvm.sh)"
-sudo ln -s /usr/bin/clangd-14 /usr/bin/clangd
+sudo ln -sfT /usr/bin/clangd-14 /usr/bin/clangd
 
 #######################################################################
 #                                Nvim install                         #
