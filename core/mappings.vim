@@ -198,4 +198,4 @@ endfor
 "endfunction
 
 " 关闭插件窗口
-map <C-C><C-C> :call utils#close_plugin_window()<cr>
+map <silent> <C-C><C-C> :call utils#close_plugin_window()<cr>
