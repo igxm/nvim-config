@@ -208,4 +208,22 @@ function! utils#add_pack(name) abort
   return l:status
 endfunction
 
+" 关闭插件窗口
+function! utils#close_plugin_window() abort
+  " Close quickfix
+  cclose
+
+  " Close Leaderf Buffer
+  redir => message
+  silent execute "ls!"
+  redir END
+  let l:buflist = split(message, '\n')
+  for l:one in l:buflist
+    let l:items = split(l:one, '"')
+    if match(l:items[0], "u*a-") >= 0
+      let l:bufid = matchstr(l:items[0], '\d\+')
+      exe 'bd! '.l:bufid
+    endif
+  endfor
+endfunction
 

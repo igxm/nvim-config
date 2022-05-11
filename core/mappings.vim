@@ -196,3 +196,6 @@ endfor
 "  silent! normal `y
 "  silent! delmarks y
 "endfunction
+
+" 关闭插件窗口
+map <C-C><C-C> :call utils#close_plugin_window()<cr>
