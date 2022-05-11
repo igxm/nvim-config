@@ -3,6 +3,9 @@ scriptencoding utf-8
 " change fillchars for folding, vertical split, end of buffer, and message separator
 set fillchars=fold:\ ,vert:\│,eob:\ ,msgsep:‾
 
+" close fold
+set nofoldenable
+
 " Paste mode toggle, it seems that Nvim's bracketed paste mode
 " does not work very well for nvim-qt, so we use good-old paste mode
 "set pastetoggle=<F12>
@@ -16,11 +19,13 @@ set timeoutlen=500
 
 set updatetime=500  " For CursorHold events
 
-" Clipboard settings, always use clipboard for all delete, yank, change, put
-" operation, see https://stackoverflow.com/q/30691466/6064933
-if !empty(provider#clipboard#Executable())
-  set clipboard+=unnamed,unnamedplus
-endif
+"set clipborad
+set clipboard=unnamed
+let g:clipboard = {
+            \'copy': { '+': 'oclip -i', '*': 'oclip -i' },
+            \'paste': { '+': 'oclip -o', '*': 'oclip -o' },
+            \'name': 'oclip',
+            \}
 
 " Disable creating swapfiles, see https://stackoverflow.com/q/821902/6064933
 set noswapfile
@@ -51,7 +56,7 @@ set expandtab       " expand tab to spaces so that tabs are spaces
 
 " Set matching pairs of characters and highlight matching brackets
 set matchpairs+=<:>,「:」,『:』,【:】,“:”,‘:’,《:》
- 
+
 set number " Show line number and absolute line number
 set norelativenumber  " Show line number and absolute line number
 
