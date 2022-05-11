@@ -169,6 +169,10 @@ else
     echo "ctags is already installed. Skip installing it."
 fi
 
+# install clangd
+sudo bash -c "$(wget -O - https://apt.llvm.org/llvm.sh)"
+sudo ln -s /usr/bin/clangd-14 /usr/bin/clangd
+
 #######################################################################
 #                                Nvim install                         #
 #######################################################################
