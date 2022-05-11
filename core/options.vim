@@ -5,7 +5,7 @@ set fillchars=fold:\ ,vert:\│,eob:\ ,msgsep:‾
 
 " Paste mode toggle, it seems that Nvim's bracketed paste mode
 " does not work very well for nvim-qt, so we use good-old paste mode
-set pastetoggle=<F12>
+"set pastetoggle=<F12>
 
 " Split window below/right when creating horizontal/vertical windows
 set splitbelow splitright
@@ -19,7 +19,7 @@ set updatetime=500  " For CursorHold events
 " Clipboard settings, always use clipboard for all delete, yank, change, put
 " operation, see https://stackoverflow.com/q/30691466/6064933
 if !empty(provider#clipboard#Executable())
-  set clipboard+=unnamedplus
+  set clipboard+=unnamed,unnamedplus
 endif
 
 " Disable creating swapfiles, see https://stackoverflow.com/q/821902/6064933
@@ -51,8 +51,9 @@ set expandtab       " expand tab to spaces so that tabs are spaces
 
 " Set matching pairs of characters and highlight matching brackets
 set matchpairs+=<:>,「:」,『:』,【:】,“:”,‘:’,《:》
-
-set number relativenumber  " Show line number and relative line number
+ 
+set number " Show line number and absolute line number
+set norelativenumber  " Show line number and absolute line number
 
 " Ignore case in general, but become case-sensitive when uppercase is present
 set ignorecase smartcase

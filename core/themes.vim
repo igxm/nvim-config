@@ -14,6 +14,7 @@ function! s:theme_setup_dict.onedark() dict abort
   colorscheme onedark
 endfunction
 
+
 function! s:theme_setup_dict.edge() dict abort
   let g:edge_enable_italic = 1
   let g:edge_better_performance = 1
@@ -69,7 +70,8 @@ let s:theme2dir = {
       \ 'kanagawa': 'kanagawa.nvim',
       \ }
 
-let s:theme = utils#RandElement(keys(s:theme2dir))
+"let s:theme = utils#RandElement(keys(s:theme2dir))
+let s:theme = 'nightfox'
 let s:colorscheme_func = printf('s:theme_setup_dict.%s()', s:theme)
 
 if !has_key(s:theme_setup_dict, s:theme)
