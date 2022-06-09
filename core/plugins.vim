@@ -33,20 +33,20 @@ let g:UltiSnipsSnippetDirectories=['UltiSnips', 'my_snippets']
 
 """""""""""""""""""""""""""""LeaderF settings"""""""""""""""""""""
 " search root path
-function! SearchRoot()
-  let l:scm_list = ['.root', '.svn', '.git']
-  for l:item in l:scm_list
-    let l:dirs = finddir(l:item, '.;', -1)
-    if !empty(l:dirs)
-      return fnamemodify(l:dirs[-1].'/../', ':p:h')
-    endif
-  endfor
-  return getcwd()
-endfunction
-let g:root_dir = SearchRoot()
-autocmd BufEnter * exe ':cd '.g:root_dir
+"function! SearchRoot()
+"  let l:scm_list = ['.root', '.svn', '.git']
+"  for l:item in l:scm_list
+"    let l:dirs = finddir(l:item, '.;', -1)
+"    if !empty(l:dirs)
+"      return fnamemodify(l:dirs[-1].'/../', ':p:h')
+"    endif
+"  endfor
+"  return getcwd()
+"endfunction
+"let g:root_dir = SearchRoot()
+"autocmd BufEnter * exe ':cd '.g:root_dir
 " set project root dir
-let g:Lf_WorkingDirectory = g:root_dir
+"let g:Lf_WorkingDirectory = g:root_dir
 " Do not use cache file
 let g:Lf_UseCache = 0
 " Refresh each time we call leaderf
@@ -70,15 +70,17 @@ endif
 " Only fuzzy-search files names
 let g:Lf_DefaultMode = 'FullPath'
 
-" Popup window settings
-let w = float2nr(&columns * 0.8)
-if w > 140
-  let g:Lf_PopupWidth = 140
-else
-  let g:Lf_PopupWidth = w
-endif
+let g:Lf_WindowHeight = 0.30
 
-let g:Lf_PopupPosition = [0, float2nr((&columns - g:Lf_PopupWidth)/2)]
+" Popup window settings
+"let w = float2nr(&columns * 0.8)
+"if w > 140
+"  let g:Lf_PopupWidth = 140
+"else
+"  let g:Lf_PopupWidth = w
+"endif
+
+"let g:Lf_PopupPosition = [0, float2nr((&columns - g:Lf_PopupWidth)/2)]
 
 " Do not use version control tool to list files under a directory since
 " submodules are not searched by default.
@@ -97,23 +99,25 @@ let g:Lf_ShortcutB = ''
 " set up working directory for git repository
 let g:Lf_WorkingDirectoryMode = 'a'
 
+let g:Lf_PythonVersion = 3
+
 " Search files in popup window
-nnoremap <silent> <C-p> :<C-U>Leaderf file --popup<CR>
+nnoremap <silent> <C-p> :<C-U>Leaderf file<CR>
 
 " Grep project files in popup window
-nnoremap <silent> <leader>fg :<C-U>Leaderf rg --no-messages --popup<CR>
+nnoremap <silent> <leader>fg :<C-U>Leaderf rg --no-messages<CR>
 
 " Search vim help files
-nnoremap <silent> <leader>fh :<C-U>Leaderf help --popup<CR>
+nnoremap <silent> <leader>fh :<C-U>Leaderf help<CR>
 
 " Search tags in current buffer
-nnoremap <silent> <leader>ft :<C-U>Leaderf bufTag --popup<CR>
+nnoremap <silent> <leader>ft :<C-U>Leaderf bufTag<CR>
 
 " Switch buffers
-nnoremap <silent> <leader>fb :<C-U>Leaderf buffer --popup<CR>
+nnoremap <silent> <leader>fb :<C-U>Leaderf buffer<CR>
 
 " Search recent files
-nnoremap <silent> <leader>fr :<C-U>Leaderf mru --popup --absolute-path<CR>
+nnoremap <silent> <leader>fr :<C-U>Leaderf mru --absolute-path<CR>
 
 let g:Lf_PopupColorscheme = 'gruvbox_material'
 
@@ -124,11 +128,12 @@ let g:Lf_RgConfig = [
     \ "--glob=!git/*",
     \ "--follow --no-ignore"
     \ ]
-let filetypes = "-t proto -t c -t py -t lua -t vim -t sh"
+"let filetypes = "-t proto -t c -t py -t lua -t vim -t sh -t go -t json -t xml -t js"
+let filetypes = ""
 " select gs searce select word
-xnoremap gs :<C-U><C-R>=printf("Leaderf! rg -F %s --nowrap --stayOpen --popup -e %s ", filetypes, leaderf#Rg#visual())<cr><cr>
+xnoremap gs :<C-U><C-R>=printf("Leaderf! rg -F %s --nowrap --stayOpen -e %s ", filetypes, leaderf#Rg#visual())<cr><cr>
 " leader g search current word
-noremap <leader>g :<C-U><C-R>=printf("Leaderf! rg -F %s --nowrap --stayOpen --popup -e %s ", filetypes, expand("<cword>"))<cr><cr>
+noremap <leader>g :<C-U><C-R>=printf("Leaderf! rg -F %s --nowrap --stayOpen -e %s ", filetypes, expand("<cword>"))<cr><cr>
 
 """"""""""""""""""""""""""""open-browser.vim settings"""""""""""""""""""
 if g:is_win || g:is_mac
@@ -284,3 +289,18 @@ function! s:wilder_init() abort
     echohl Error |echomsg "Wilder.nvim missing: run :PackerSync to fix."|echohl None
   endtry
 endfunction
+
+""""""""""""""""""""""""""""""nerdtree settings begin"""""""""""""""""""""""""""""
+function! ToggleNERDTree()
+    silent exe ':NERDTree '.expand('%:p:h')
+endfunction
+map <leader>t :call ToggleNERDTree()<cr>
+let NERDTreeIgnore = ['\~$', '\$.*$', '\.swp$', '\.pyc$', '#.\{-\}#$']
+let s:ignore = ['.pb', '.xls', '.xlsx', '.mobi', '.mp4', '.mp3']
+for s:extname in s:ignore
+    let NERDTreeIgnore += [escape(s:extname, '.~$')]
+endfor
+let NERDTreeRespectWildIgnore = 1
+let g:NERDTreeChDirMode = 0
+""""""""""""""""""""""""""""""nerdtree settings end""""""""""""""""""""""""""""""
+

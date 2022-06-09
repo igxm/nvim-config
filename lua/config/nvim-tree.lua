@@ -114,6 +114,8 @@ nvim_tree.setup({
 })
 
 vim.keymap.set('n', '<leader>t', function()
-  return require('nvim-tree').toggle(false, false)
+  local view = require "nvim-tree.view"
+  view.close()
+  return require('nvim-tree').open(vim.fn.expand('%:p:h'))
 end,
 { noremap = true, silent = true, desc = "toggle nvim-tree"})

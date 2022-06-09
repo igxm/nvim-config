@@ -127,6 +127,27 @@ else
   vim.notify("vim-language-server not found!", 'warn', {title = 'Nvim-config'})
 end
 
+if utils.executable('gopls') then
+  local util = require "lspconfig/util"
+  lspconfig.gopls.setup {
+    cmd = {"gopls", "serve"},
+    filetypes = {"go", "gomod"},
+    root_dir = util.root_pattern("go.work", "go.mod", ".git"),
+    settings = {
+      gopls = {
+        analyses = {
+          unusedparams = true,
+        },
+        staticcheck = true,
+      },
+    },
+  }
+else
+  vim.notify("gopls not found!", 'warn', {title = 'Nvim-config'})
+end
+
+
+
 -- set up bash-language-server
 if utils.executable('bash-language-server') then
   lspconfig.bashls.setup({

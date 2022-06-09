@@ -71,7 +71,10 @@ require("lualine").setup({
     lualine_a = { "mode" },
     lualine_b = { "branch", "diff" },
     lualine_c = {
-      "filename",
+      {
+        "filename",
+        path = 1,
+      },
       {
         ime_state,
         color = {fg = 'black', bg = '#f46868'}

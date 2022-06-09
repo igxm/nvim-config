@@ -208,6 +208,25 @@ function! utils#add_pack(name) abort
   return l:status
 endfunction
 
+lua << EOF
+-- Close current window and all its floating subwindows
+function close_win_and_floats()
+  local this_win = vim.fn.win_getid()
+  -- close all floating windows that are relative to the current one
+  for _, win in ipairs(vim.api.nvim_list_wins()) do
+    local win_config = vim.api.nvim_win_get_config(win)
+    -- If the mapping doesn't close enough windows, use the following line instead:
+    -- if win_config.relative ~= "" then
+    if win_config.relative == "win" and win_config.win == this_win then
+      vim.api.nvim_win_close(win, false)
+    end
+  end
+
+  local close_buffers = require 'close_buffers'
+  close_buffers.delete({type = 'hidden'})
+  close_buffers.delete({type = 'nameless'})
+end
+EOF
 " 关闭插件窗口
 function! utils#close_plugin_window() abort
   " Close quickfix
@@ -225,5 +244,6 @@ function! utils#close_plugin_window() abort
       exe 'bd! '.l:bufid
     endif
   endfor
+  lua close_win_and_floats()
 endfunction
 

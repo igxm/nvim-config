@@ -88,8 +88,6 @@ require("packer").startup({
 
     -- Show git change (change, delete, add) signs in vim sign column
     use({"mhinz/vim-signify", event = 'BufEnter'})
-    -- Another similar plugin
-    -- use 'airblade/vim-gitgutter'
 
     use {'kyazdani42/nvim-web-devicons', event = 'VimEnter'}
 
@@ -98,11 +96,6 @@ require("packer").startup({
       event = 'VimEnter',
       config = [[require('config.statusline')]]
     }
-
-    use({ "akinsho/bufferline.nvim", event = "VimEnter", config = [[require('config.bufferline')]] })
-
-    -- fancy start screen
-    use { 'goolord/alpha-nvim', event = 'VimEnter', config = [[require('config.alpha-nvim')]] }
 
     use({
       "lukas-reineke/indent-blankline.nvim",
@@ -122,13 +115,6 @@ require("packer").startup({
       end
     })
 
-    -- For Windows and Mac, we can open an URL in the browser. For Linux, it may
-    -- not be possible since we maybe in a server which disables GUI.
-    if vim.g.is_win or vim.g.is_mac then
-      -- open URL in browser
-      use({"tyru/open-browser.vim", event = "VimEnter"})
-    end
-
     -- Only install these plugins if ctags are installed on the system
     if utils.executable("ctags") then
       -- show file tags in vim window
@@ -141,12 +127,6 @@ require("packer").startup({
 
     -- Automatic insertion and deletion of a pair of characters
     use({"Raimondi/delimitMate", event = "InsertEnter"})
-
-    -- Comment plugin
-    use({"tpope/vim-commentary", event = "VimEnter"})
-
-    -- Multiple cursor plugin like Sublime Text?
-    -- use 'mg979/vim-visual-multi'
 
     -- Autosave files on certain events
     use({
@@ -231,10 +211,12 @@ require("packer").startup({
 
     -- file explorer
     use {
-      'kyazdani42/nvim-tree.lua',
-      requires = { 'kyazdani42/nvim-web-devicons' },
-      config = [[require('config.nvim-tree')]]
+      'scrooloose/nerdtree',
+      requires = { 'ryanoasis/vim-devicons' },
     }
+
+    -- close hide buffer
+    use { 'kazhala/close-buffers.nvim' }
   end,
   config = {
     max_jobs = 16,
