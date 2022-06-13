@@ -71,7 +71,12 @@ let s:theme2dir = {
       \ }
 
 "let s:theme = utils#RandElement(keys(s:theme2dir))
-let s:theme = 'nightfox'
+"let s:theme = 'onedark'
+"let s:theme = 'edge'
+"let s:theme = 'sonokai'
+"let s:theme = 'doom_one'
+let s:theme = 'everforest'
+"let s:theme = 'nightfox'
 let s:colorscheme_func = printf('s:theme_setup_dict.%s()', s:theme)
 
 if !has_key(s:theme_setup_dict, s:theme)
