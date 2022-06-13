@@ -223,7 +223,6 @@ function close_win_and_floats()
   end
 
   local close_buffers = require 'close_buffers'
-  close_buffers.delete({type = 'hidden'})
   close_buffers.delete({type = 'nameless'})
 end
 EOF

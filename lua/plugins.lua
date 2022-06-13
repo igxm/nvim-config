@@ -211,8 +211,18 @@ require("packer").startup({
 
     -- file explorer
     use {
-      'scrooloose/nerdtree',
-      requires = { 'ryanoasis/vim-devicons' },
+      'kyazdani42/nvim-tree.lua',
+      requires = {
+        'kyazdani42/nvim-web-devicons', -- optional, for file icon
+      },
+      tag = 'nightly', -- optional, updated every week. (see issue #1193)
+      config = [[require('config.nvim-tree')]],
+    }
+    use {
+      'akinsho/bufferline.nvim',
+      tag = "v2.*",
+      requires = 'kyazdani42/nvim-web-devicons',
+      config = [[require('config.buffline')]],
     }
 
     -- close hide buffer

@@ -18,10 +18,12 @@ nnoremap <silent> <leader><Space> :<C-U>StripTrailingWhitespace<CR>
 " register, see also https://stackoverflow.com/q/10723700/6064933.
 xnoremap p "_c<ESC>p
 
-" goto tab
-nnoremap <C-l> gt
-nnoremap <C-h> gT
+" goto next buffer
+nnoremap <C-l> :<C-U>call buf_utils#GoToBuffer(v:count, 'forward')<CR>
+nnoremap <C-h> :<C-U>call buf_utils#GoToBuffer(v:count, 'backward')<CR>
 
 " 关闭插件窗口
 map <silent> <C-C><C-C> :call utils#close_plugin_window()<cr>
 
+" 关闭当前 buffer
+map <silent> <C-q> :bp<bar>sp<bar>bn<bar>bd<CR>

@@ -290,17 +290,3 @@ function! s:wilder_init() abort
   endtry
 endfunction
 
-""""""""""""""""""""""""""""""nerdtree settings begin"""""""""""""""""""""""""""""
-function! ToggleNERDTree()
-    silent exe ':NERDTree '.expand('%:p:h')
-endfunction
-map <leader>t :call ToggleNERDTree()<cr>
-let NERDTreeIgnore = ['\~$', '\$.*$', '\.swp$', '\.pyc$', '#.\{-\}#$']
-let s:ignore = ['.pb', '.xls', '.xlsx', '.mobi', '.mp4', '.mp3']
-for s:extname in s:ignore
-    let NERDTreeIgnore += [escape(s:extname, '.~$')]
-endfor
-let NERDTreeRespectWildIgnore = 1
-let g:NERDTreeChDirMode = 0
-""""""""""""""""""""""""""""""nerdtree settings end""""""""""""""""""""""""""""""
-
