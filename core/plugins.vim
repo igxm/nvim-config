@@ -32,94 +32,34 @@ let g:UltiSnipsJumpBackwardTrigger='<c-k>'
 let g:UltiSnipsSnippetDirectories=['UltiSnips', 'my_snippets']
 
 """""""""""""""""""""""""""""LeaderF settings"""""""""""""""""""""
-" search root path
-"function! SearchRoot()
-"  let l:scm_list = ['.root', '.svn', '.git']
-"  for l:item in l:scm_list
-"    let l:dirs = finddir(l:item, '.;', -1)
-"    if !empty(l:dirs)
-"      return fnamemodify(l:dirs[-1].'/../', ':p:h')
-"    endif
-"  endfor
-"  return getcwd()
-"endfunction
-"let g:root_dir = SearchRoot()
-"autocmd BufEnter * exe ':cd '.g:root_dir
-" set project root dir
-"let g:Lf_WorkingDirectory = g:root_dir
-" Do not use cache file
-let g:Lf_UseCache = 0
-" Refresh each time we call leaderf
-let g:Lf_UseMemoryCache = 0
-
 " Ignore certain files and directories when searching files
 let g:Lf_WildIgnore = {
   \ 'dir': ['.git', '__pycache__', '.DS_Store'],
-  \ 'file': ['*.exe', '*.dll', '*.so', '*.o', '*.pyc', '*.jpg', '*.png',
+  \ 'file': ['*.exe', '*.dll', '*.so', '*.a', '*.o', '*.pyc', '*.jpg', '*.png',
   \ '*.gif', '*.svg', '*.ico', '*.db', '*.tgz', '*.tar.gz', '*.gz',
   \ '*.zip', '*.bin', '*.pptx', '*.xlsx', '*.docx', '*.pdf', '*.tmp',
   \ '*.wmv', '*.mkv', '*.mp4', '*.rmvb', '*.ttf', '*.ttc', '*.otf',
   \ '*.mp3', '*.aac']
   \}
-
-" Do not show fancy icons for Linux server.
-if g:is_linux
-  let g:Lf_ShowDevIcons = 0
-endif
-
-" Only fuzzy-search files names
+let g:Lf_UseCache = 0
+let g:Lf_UseMemoryCache = 0
 let g:Lf_DefaultMode = 'FullPath'
-
 let g:Lf_WindowHeight = 0.30
-
-" Popup window settings
-"let w = float2nr(&columns * 0.8)
-"if w > 140
-"  let g:Lf_PopupWidth = 140
-"else
-"  let g:Lf_PopupWidth = w
-"endif
-
-"let g:Lf_PopupPosition = [0, float2nr((&columns - g:Lf_PopupWidth)/2)]
-
-" Do not use version control tool to list files under a directory since
-" submodules are not searched by default.
 let g:Lf_UseVersionControlTool = 0
-
-" Use rg as the default search tool
-let g:Lf_DefaultExternalTool = "rg"
-
-" show dot files
+let g:Lf_DefaultExternalTool = "find"
 let g:Lf_ShowHidden = 1
-
-" Disable default mapping
 let g:Lf_ShortcutF = ''
 let g:Lf_ShortcutB = ''
-
-" set up working directory for git repository
 let g:Lf_WorkingDirectoryMode = 'a'
-
 let g:Lf_PythonVersion = 3
-
-" Search files in popup window
-nnoremap <silent> <C-p> :<C-U>Leaderf file<CR>
-
-" Grep project files in popup window
-nnoremap <silent> <leader>fg :<C-U>Leaderf rg --no-messages<CR>
-
-" Search vim help files
-nnoremap <silent> <leader>fh :<C-U>Leaderf help<CR>
-
-" Search tags in current buffer
-nnoremap <silent> <leader>ft :<C-U>Leaderf bufTag<CR>
-
-" Switch buffers
-nnoremap <silent> <leader>fb :<C-U>Leaderf buffer<CR>
-
-" Search recent files
-nnoremap <silent> <leader>fr :<C-U>Leaderf mru --absolute-path<CR>
-
 let g:Lf_PopupColorscheme = 'gruvbox_material'
+
+nnoremap <silent> <C-p> :<C-U>Leaderf file<CR>
+nnoremap <silent> <leader>fg :<C-U>Leaderf rg --no-messages<CR>
+nnoremap <silent> <leader>fh :<C-U>Leaderf help<CR>
+nnoremap <silent> <leader>ft :<C-U>Leaderf bufTag<CR>
+nnoremap <silent> <leader>fb :<C-U>Leaderf buffer<CR>
+nnoremap <silent> <leader>fr :<C-U>Leaderf mru --absolute-path<CR>
 
 " 搜索选中的字符串，对结果按 i 支持二次过滤
 let g:Lf_RgConfig = [
@@ -128,8 +68,7 @@ let g:Lf_RgConfig = [
     \ "--glob=!git/*",
     \ "--follow --no-ignore"
     \ ]
-"let filetypes = "-t proto -t c -t py -t lua -t vim -t sh -t go -t json -t xml -t js"
-let filetypes = ""
+let filetypes = "-t proto -t c -t py -t lua -t vim -t sh -t go -t json -t xml -t js"
 " select gs searce select word
 xnoremap gs :<C-U><C-R>=printf("Leaderf! rg -F %s --nowrap --stayOpen -e %s ", filetypes, leaderf#Rg#visual())<cr><cr>
 " leader g search current word
