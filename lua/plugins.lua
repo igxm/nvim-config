@@ -62,9 +62,9 @@ require("packer").startup({
 
     -- File search, tag search and more
     if vim.g.is_win then
-      use({"Yggdroot/LeaderF", cmd = "Leaderf"})
+      use({"Yggdroot/LeaderF"})
     else
-      use({ "Yggdroot/LeaderF", cmd = "Leaderf", run = ":LeaderfInstallCExtension" })
+      use({ "Yggdroot/LeaderF", run = ":LeaderfInstallCExtension" })
     end
 
     use {
