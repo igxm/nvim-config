@@ -68,7 +68,7 @@ let g:Lf_RgConfig = [
     \ "--glob=!git/*",
     \ "--follow --no-ignore"
     \ ]
-let filetypes = "-t proto -t c -t py -t lua -t vim -t sh -t go -t json -t xml -t js"
+let filetypes = "-t proto -t c -t py -t lua -t vim -t sh -t go -t json -t xml -t js -t cpp"
 " select gs searce select word
 xnoremap gs :<C-U><C-R>=printf("Leaderf! rg -F %s --nowrap --stayOpen -e %s ", filetypes, leaderf#Rg#visual())<cr><cr>
 " leader g search current word
