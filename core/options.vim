@@ -21,11 +21,22 @@ set updatetime=500  " For CursorHold events
 
 "set clipborad
 set clipboard=unnamed
-let g:clipboard = {
-            \'copy': { '+': 'oclip -i', '*': 'oclip -i' },
-            \'paste': { '+': 'oclip -o', '*': 'oclip -o' },
-            \'name': 'oclip',
-            \}
+"let g:clipboard = {
+"            \'copy': { '+': 'oclip -i', '*': 'oclip -i' },
+"            \'paste': { '+': 'oclip -o', '*': 'oclip -o' },
+"            \'name': 'oclip',
+"            \}
+"let g:clipboard = {
+"        \   'name': 'osc52',
+"        \   'copy': {
+"        \     '+': {lines, regtype -> OSCYankString(join(lines, "\n"))},
+"        \     '*': {lines, regtype -> OSCYankString(join(lines, "\n"))},
+"        \   },
+"        \   'paste': {
+"        \     '+': {-> [split(getreg(''), '\n'), getregtype('')]},
+"        \     '*': {-> [split(getreg(''), '\n'), getregtype('')]},
+"        \   },
+"        \ }
 
 " Disable creating swapfiles, see https://stackoverflow.com/q/821902/6064933
 set noswapfile

@@ -226,6 +226,12 @@ require("packer").startup({
 
     -- close hide buffer
     use { 'kazhala/close-buffers.nvim' }
+
+    -- osc yank
+    use {
+      'ojroques/vim-oscyank',
+      config = [[require('config.oscyank')]],
+    }
   end,
   config = {
     max_jobs = 16,
