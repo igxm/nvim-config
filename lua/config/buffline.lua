@@ -12,7 +12,7 @@ require('bufferline').setup {
     -- and so changing this is NOT recommended, this is intended
     -- as an escape hatch for people who cannot bear it for whatever reason
     indicator = {
-      icon = '▎',
+      icon = '',
     },
     buffer_close_icon = '',
     modified_icon = '●',
@@ -37,7 +37,7 @@ require('bufferline').setup {
     persist_buffer_sort = true, -- whether or not custom sorted buffers should persist
     -- can also be a table containing 2 custom separators
     -- [focused and unfocused]. eg: { '|', '|' }
-    separator_style = "thick",
+    separator_style = "thin",
     enforce_regular_tabs = false,
     always_show_bufferline = true,
     sort_by = 'id',

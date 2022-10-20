@@ -74,22 +74,10 @@ require("packer").startup({
     -- search emoji and other symbols
     use {'nvim-telescope/telescope-symbols.nvim', after = 'telescope.nvim'}
 
-    -- A list of colorscheme plugin you may want to try. Find what suits you.
-    use({"lifepillar/vim-gruvbox8", opt = true})
-    use({"navarasu/onedark.nvim", opt = true})
-    use({"sainnhe/edge", opt = true})
-    use({"sainnhe/sonokai", opt = true})
-    use({"sainnhe/gruvbox-material", opt = true})
-    use({"shaunsingh/nord.nvim", opt = true})
-    use({"NTBBloodbath/doom-one.nvim", opt = true})
-    use({"sainnhe/everforest", opt = true})
-    use({"EdenEast/nightfox.nvim", opt = true})
-    use({"rebelot/kanagawa.nvim", opt = true})
-
     -- Show git change (change, delete, add) signs in vim sign column
     use({"mhinz/vim-signify", event = 'BufEnter'})
 
-    use {'kyazdani42/nvim-web-devicons', event = 'VimEnter'}
+    use {'kyazdani42/nvim-web-devicons'}
 
     use {
       'nvim-lualine/lualine.nvim',
@@ -219,7 +207,6 @@ require("packer").startup({
     }
     use {
       'akinsho/bufferline.nvim',
-      tag = "v2.*",
       requires = 'kyazdani42/nvim-web-devicons',
       config = [[require('config.buffline')]],
     }
@@ -231,6 +218,16 @@ require("packer").startup({
     use {
       'ojroques/vim-oscyank',
       config = [[require('config.oscyank')]],
+    }
+
+    use {
+      "catppuccin/nvim",
+      as = "catppuccin",
+      config = function()
+        vim.g.catppuccin_flavour = "latte" -- latte, frappe, macchiato, mocha
+        require("catppuccin").setup()
+        vim.api.nvim_command "colorscheme catppuccin"
+      end
     }
   end,
   config = {

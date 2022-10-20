@@ -19,8 +19,7 @@ let s:core_conf_files = [
       \ 'options.vim',
       \ 'autocommands.vim',
       \ 'mappings.vim',
-      \ 'plugins.vim',
-      \ 'themes.vim'
+      \ 'plugins.vim'
       \ ]
 
 for s:fname in s:core_conf_files

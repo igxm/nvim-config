@@ -52,7 +52,8 @@ let g:Lf_ShortcutF = ''
 let g:Lf_ShortcutB = ''
 let g:Lf_WorkingDirectoryMode = 'a'
 let g:Lf_PythonVersion = 3
-let g:Lf_PopupColorscheme = 'gruvbox_material'
+let g:Lf_StlColorscheme = 'solarized'
+let g:Lf_StlSeparator = { 'left': '', 'right': '' }
 
 nnoremap <silent> <C-p> :<C-U>Leaderf file<CR>
 nnoremap <silent> <leader>fg :<C-U>Leaderf rg --no-messages<CR>
