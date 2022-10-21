@@ -19,8 +19,8 @@ nnoremap <silent> <leader><Space> :<C-U>StripTrailingWhitespace<CR>
 xnoremap p "_c<ESC>p
 
 " goto next buffer
-nnoremap <C-l> :<C-U>call buf_utils#GoToBuffer(v:count, 'forward')<CR>
-nnoremap <C-h> :<C-U>call buf_utils#GoToBuffer(v:count, 'backward')<CR>
+nnoremap <silent> <C-l> :<C-U>call buf_utils#GoToBuffer(v:count, 'forward')<CR>
+nnoremap <silent> <C-h> :<C-U>call buf_utils#GoToBuffer(v:count, 'backward')<CR>
 
 " 关闭插件窗口
 map <silent> <C-C><C-C> :call utils#close_plugin_window()<cr>

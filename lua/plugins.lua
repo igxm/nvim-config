@@ -24,6 +24,12 @@ require("packer").startup({
 
     use({"wbthomason/packer.nvim", opt = true})
 
+    use {
+      "catppuccin/nvim",
+      as = "catppuccin",
+      config = [[require('config.catppuccin')]],
+    }
+
     use({"onsails/lspkind-nvim", event = "VimEnter"})
     -- auto-completion engine
     use {"hrsh7th/nvim-cmp", after = "lspkind-nvim", config = [[require('config.nvim-cmp')]]}
@@ -218,16 +224,6 @@ require("packer").startup({
     use {
       'ojroques/vim-oscyank',
       config = [[require('config.oscyank')]],
-    }
-
-    use {
-      "catppuccin/nvim",
-      as = "catppuccin",
-      config = function()
-        vim.g.catppuccin_flavour = "latte" -- latte, frappe, macchiato, mocha
-        require("catppuccin").setup()
-        vim.api.nvim_command "colorscheme catppuccin"
-      end
     }
   end,
   config = {
