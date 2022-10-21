@@ -104,6 +104,9 @@ echo "export PATH=\"$NODE_DIR/bin:\$PATH\"" >> "$HOME/.bashrc"
 
 source "$HOME/.bashrc"
 
+unset all_proxy
+unset http_proxy
+unset https_proxy
 # Install vim-language-server
 "$NODE_DIR/bin/npm" install -g vim-language-server
 
@@ -138,7 +141,6 @@ if [[ -z "$(command -v rg)" ]] && [[ ! -f "$RIPGREP_DIR/rg" ]]; then
     mv $HOME/.local/tools/ripgrep/doc/rg.1 $HOME/.local/tools/ripgrep/doc/man/man1
 
     sed -i "\:"$HOME/.local/tools/ripgrep/doc/man":d" "$HOME/.bashrc"
-    echo "export MANPATH=$HOME/.local/tools/ripgrep/doc/man:$MANPATH" >> "$HOME/.bashrc"
 else
     echo "ripgrep is already installed. Skip installing it."
 fi
