@@ -173,7 +173,7 @@ fi
 
 # install clangd
 sudo bash -c "$(wget -O - https://apt.llvm.org/llvm.sh)"
-sudo ln -sfT /usr/bin/clangd-14 /usr/bin/clangd
+sudo ln -sfT $(ls -1 /usr/bin/clangd* | tail -1) /usr/bin/clangd
 
 #######################################################################
 #                                Nvim install                         #
@@ -208,6 +208,11 @@ if [[ -d "$NVIM_CONFIG_DIR" ]]; then
     rm -rf "$NVIM_CONFIG_DIR.backup"
     mv "$NVIM_CONFIG_DIR" "$NVIM_CONFIG_DIR.backup"
 fi
+
+#######################################################################
+#                               Other install                         #
+#######################################################################
+sudo apt install -y gcc make g++ tmux
 
 git clone --depth=1 https://github.com/hanxi/nvim-config.git "$NVIM_CONFIG_DIR"
 
