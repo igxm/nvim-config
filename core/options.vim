@@ -6,10 +6,6 @@ set fillchars=fold:\ ,vert:\│,eob:\ ,msgsep:‾
 " close fold
 set nofoldenable
 
-" Paste mode toggle, it seems that Nvim's bracketed paste mode
-" does not work very well for nvim-qt, so we use good-old paste mode
-"set pastetoggle=<F12>
-
 " Split window below/right when creating horizontal/vertical windows
 set splitbelow splitright
 
@@ -21,11 +17,6 @@ set updatetime=500  " For CursorHold events
 
 "set clipborad
 set clipboard=unnamed
-"let g:clipboard = {
-"            \'copy': { '+': 'oclip -i', '*': 'oclip -i' },
-"            \'paste': { '+': 'oclip -o', '*': 'oclip -o' },
-"            \'name': 'oclip',
-"            \}
 "let g:clipboard = {
 "        \   'name': 'osc52',
 "        \   'copy': {
@@ -191,3 +182,8 @@ set diffopt+=context:3  " context for diff
 set diffopt+=internal,indent-heuristic,algorithm:histogram
 
 set nowrap  " do no wrap
+
+" cursorline and column
+set cursorline
+set cursorcolumn
+

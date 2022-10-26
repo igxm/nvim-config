@@ -124,7 +124,7 @@ require("packer").startup({
 
     -- Autosave files on certain events
     use({
-      "Pocco81/AutoSave.nvim",
+      "Pocco81/auto-save.nvim",
       event = "VimEnter",
       config = function()
         vim.defer_fn(function() require('config.autosave') end, 1500)
