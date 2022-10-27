@@ -62,15 +62,3 @@ require('lsp-colors').setup()
 local border = { '╭', '─', '╮', '│', '╯', '─', '╰', '│' }
 vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(vim.lsp.handlers.hover, { border = border })
 vim.lsp.handlers['textDocument/signatureHelp'] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = border })
-
--- auto set GOPATH
-vim.api.nvim_create_autocmd('BufReadPre', {
-  pattern = { "*.go" },
-  group = 'Init',
-  callback = function()
-    local path = vim.fn.expand('%:p:h')
-    local gopath = path:gsub("(.*/go)/.*", "%1")
-    if path:find("/go/") then
-    end
-  end,
-})
