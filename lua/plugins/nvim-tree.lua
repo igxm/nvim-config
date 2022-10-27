@@ -1,3 +1,12 @@
+local map = require('utils').map
+
+map('n', '<leader>t', function()
+    local view = require "nvim-tree.view"
+    view.close()
+    return require('nvim-tree').open(vim.fn.expand('%:p:h'))
+  end,
+  { desc = "toggle nvim-tree"})
+
 local nvim_tree = require("nvim-tree")
 
 local mappings_list = {
@@ -139,10 +148,4 @@ nvim_tree.setup({
   },
 })
 
-vim.keymap.set('n', '<leader>t', function()
-  local view = require "nvim-tree.view"
-  view.close()
-  return require('nvim-tree').open(vim.fn.expand('%:p:h'))
-end,
-{ noremap = true, silent = true, desc = "toggle nvim-tree"})
 

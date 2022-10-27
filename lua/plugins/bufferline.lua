@@ -1,5 +1,12 @@
+local map = require('utils').map
+
+map('n', '<C-h>', '<Cmd>BufferLineCyclePrev<CR>')
+map('n', '<C-l>', '<Cmd>BufferLineCycleNext<CR>')
+
 require('bufferline').setup {
-  highlights = require("catppuccin.groups.integrations.bufferline").get(),
+  highlights = require("catppuccin.groups.integrations.bufferline").get {
+    styles = {"bold"},
+  },
   options = {
     mode = "buffers", -- set to "tabs" to only show tabpages instead
     numbers = function(opts)
