@@ -221,7 +221,10 @@ require("packer").startup({
     -- tabline
     use({
       "akinsho/bufferline.nvim",
-      requires = { "kyazdani42/nvim-web-devicons" },
+      requires = {
+        "catppuccin/nvim",
+        "kyazdani42/nvim-web-devicons",
+      },
       config = [[require("plugins.bufferline")]],
     })
 

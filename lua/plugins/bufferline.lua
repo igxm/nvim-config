@@ -5,17 +5,17 @@ map('n', '<C-l>', '<Cmd>BufferLineCycleNext<CR>')
 
 require('bufferline').setup {
   highlights = require("catppuccin.groups.integrations.bufferline").get {
-    styles = {"bold"},
+    styles = { "bold" },
   },
   options = {
     mode = "buffers", -- set to "tabs" to only show tabpages instead
     numbers = function(opts)
       return string.format('%s', opts.raise(opts.ordinal))
     end,
-    close_command = nil,       -- can be a string | function, see "Mouse actions"
+    close_command = nil, -- can be a string | function, see "Mouse actions"
     right_mouse_command = nil, -- can be a string | function, see "Mouse actions"
-    left_mouse_command = nil,    -- can be a string | function, see "Mouse actions"
-    middle_mouse_command = nil,          -- can be a string | function, see "Mouse actions"
+    left_mouse_command = nil, -- can be a string | function, see "Mouse actions"
+    middle_mouse_command = nil, -- can be a string | function, see "Mouse actions"
     -- NOTE: this plugin is designed with this icon in mind,
     -- and so changing this is NOT recommended, this is intended
     -- as an escape hatch for people who cannot bear it for whatever reason
@@ -33,9 +33,9 @@ require('bufferline').setup {
     diagnostics = false,
     diagnostics_update_in_insert = false,
     diagnostics_indicator = function(count, level, diagnostics_dict, context)
-      return "("..count..")"
+      return "(" .. count .. ")"
     end,
-    offsets = {{filetype = "NvimTree", text = "File Explorer", text_align = "left" }},
+    offsets = { { filetype = "NvimTree", text = "File Explorer", text_align = "left" } },
     color_icons = true, -- whether or not to add the filetype icon highlights
     show_buffer_icons = true, -- disable filetype icons for buffers
     show_buffer_close_icons = false,
