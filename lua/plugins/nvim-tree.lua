@@ -1,41 +1,41 @@
 local map = require('utils').map
 
 map('n', '<leader>t', function()
-    local view = require "nvim-tree.view"
-    view.close()
-    return require('nvim-tree').open(vim.fn.expand('%:p:h'))
-  end,
-  { desc = "toggle nvim-tree"})
+  local view = require "nvim-tree.view"
+  view.close()
+  return require('nvim-tree').open(vim.fn.expand('%:p:h'))
+end,
+  { desc = "toggle nvim-tree" })
 
 local nvim_tree = require("nvim-tree")
 
 local mappings_list = {
   -- user mappings go here
-  { key = "u",                              action = "dir_up" },
-  { key = "p",                              action = "parent_node" },
-  { key = "<C-v>",                          action = "vsplit" },
-  { key = "<C-x>",                          action = "split" },
-  { key = "I",                              action = "toggle_git_ignored" },
-  { key = "H",                              action = "toggle_dotfiles" },
-  { key = "U",                              action = "toggle_custom" },
-  { key = "R",                              action = "refresh" },
-  { key = "a",                              action = "create" },
-  { key = "d",                              action = "remove" },
-  { key = "D",                              action = "trash" },
-  { key = "r",                              action = "rename" },
-  { key = "<C-r>",                          action = "full_rename" },
-  { key = "X",                              action = "cut" },
-  { key = "C",                              action = "copy" },
-  { key = "P",                              action = "paste" },
-  { key = "y",                              action = "copy_name" },
-  { key = "Y",                              action = "copy_path" },
-  { key = "gy",                             action = "copy_absolute_path" },
-  { key = "q",                              action = "close" },
-  { key = "W",                              action = "collapse_all" },
-  { key = "E",                              action = "expand_all" },
-  { key = "S",                              action = "search_node" },
-  { key = "<C-k>",                          action = "toggle_file_info" },
-  { key = "?",                              action = "toggle_help" }
+  { key = "u", action = "dir_up" },
+  { key = "p", action = "parent_node" },
+  { key = "<C-v>", action = "vsplit" },
+  { key = "<C-x>", action = "split" },
+  { key = "I", action = "toggle_git_ignored" },
+  { key = "H", action = "toggle_dotfiles" },
+  { key = "U", action = "toggle_custom" },
+  { key = "R", action = "refresh" },
+  { key = "a", action = "create" },
+  { key = "d", action = "remove" },
+  { key = "D", action = "trash" },
+  { key = "r", action = "rename" },
+  { key = "<C-r>", action = "full_rename" },
+  { key = "X", action = "cut" },
+  { key = "C", action = "copy" },
+  { key = "P", action = "paste" },
+  { key = "y", action = "copy_name" },
+  { key = "Y", action = "copy_path" },
+  { key = "gy", action = "copy_absolute_path" },
+  { key = "q", action = "close" },
+  { key = "W", action = "collapse_all" },
+  { key = "E", action = "expand_all" },
+  { key = "S", action = "search_node" },
+  { key = "<C-k>", action = "toggle_file_info" },
+  { key = "?", action = "toggle_help" }
 }
 
 nvim_tree.setup({
@@ -147,5 +147,3 @@ nvim_tree.setup({
     },
   },
 })
-
-

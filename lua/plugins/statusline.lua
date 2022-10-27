@@ -45,14 +45,14 @@ local function mixed_indent()
   end
   if not mixed then return '' end
   if mixed_same_line ~= nil and mixed_same_line > 0 then
-     return 'MI:'..mixed_same_line
+    return 'MI:' .. mixed_same_line
   end
-  local space_indent_cnt = vim.fn.searchcount({pattern=space_pat, max_count=1e3}).total
-  local tab_indent_cnt =  vim.fn.searchcount({pattern=tab_pat, max_count=1e3}).total
+  local space_indent_cnt = vim.fn.searchcount({ pattern = space_pat, max_count = 1e3 }).total
+  local tab_indent_cnt = vim.fn.searchcount({ pattern = tab_pat, max_count = 1e3 }).total
   if space_indent_cnt > tab_indent_cnt then
-    return 'MI:'..tab_indent
+    return 'MI:' .. tab_indent
   else
-    return 'MI:'..space_indent
+    return 'MI:' .. space_indent
   end
 end
 
@@ -77,11 +77,11 @@ require("lualine").setup({
       },
       {
         ime_state,
-        color = {fg = 'black', bg = '#f46868'}
+        color = { fg = 'black', bg = '#f46868' }
       },
       {
         spell,
-        color = {fg = 'black', bg = '#a7c080'}
+        color = { fg = 'black', bg = '#a7c080' }
       },
     },
     lualine_x = {
@@ -122,6 +122,5 @@ require("lualine").setup({
     lualine_z = {},
   },
   tabline = {},
-  extensions = {'quickfix', 'fugitive', 'nvim-tree'},
+  extensions = { 'quickfix', 'fugitive', 'nvim-tree' },
 })
-
