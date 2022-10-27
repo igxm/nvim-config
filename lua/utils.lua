@@ -22,7 +22,7 @@ end
 
 vim.cmd([[
 " 关闭插件窗口
-function! Close_plugin_window() abort
+function! ClosePluginWindow() abort
   " Close quickfix
   cclose
 
@@ -57,7 +57,7 @@ function M.close_plugin_window()
 
   local close_buffers = require 'close_buffers'
   close_buffers.delete({ type = 'nameless' })
-  vim.fn['Close_plugin_window']()
+  vim.fn['ClosePluginWindow']()
 end
 
 return M

@@ -10,6 +10,9 @@ map('n', '<leader><Space>', '<Cmd>StripTrailingWhitespace<CR>')
 -- undo toggle
 map('n', '<leader>u', '<Cmd>MundoToggle<CR>')
 
+-- vista
+map('n', '<leader>v', '<Cmd>Vista!!<CR>')
+
 -- Replace visual selection with text in register, but not contaminate the
 -- register, see also https://stackoverflow.com/q/10723700/6064933.
 map('x', 'p', '"_c<ESC>p')
