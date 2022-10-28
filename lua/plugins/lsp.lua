@@ -19,6 +19,7 @@ local settings = {
   mappings = {
     ["<C-]>"] = 'lua vim.lsp.buf.definition()',
   },
+  on_attach = function(client, bufnr) end,
   servers = {
     eslint = {},
     pylsp = {},
