@@ -22,7 +22,6 @@ require("packer").startup({
 
     use({
       "catppuccin/nvim",
-      as = "catppuccin",
       config = [[require("plugins.catppuccin")]],
     })
 
@@ -222,7 +221,7 @@ require("packer").startup({
     use({
       "akinsho/bufferline.nvim",
       requires = {
-        "catppuccin",
+        "catppuccin/nvim",
         "kyazdani42/nvim-web-devicons",
       },
       config = [[require("plugins.bufferline")]],
