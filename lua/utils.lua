@@ -44,6 +44,7 @@ endfunction
 
 -- Close current window and all its floating subwindows
 function M.close_plugin_window()
+  vim.fn['ClosePluginWindow']()
   local this_win = vim.fn.win_getid()
   -- close all floating windows that are relative to the current one
   for _, win in ipairs(vim.api.nvim_list_wins()) do
@@ -57,7 +58,6 @@ function M.close_plugin_window()
 
   local close_buffers = require 'close_buffers'
   close_buffers.delete({ type = 'nameless' })
-  vim.fn['ClosePluginWindow']()
 end
 
 return M
