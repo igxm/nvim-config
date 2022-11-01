@@ -22,3 +22,7 @@ map('', '<C-C><C-C>', function() utils.close_plugin_window() end)
 
 -- close current buffer
 map('', '<C-q>', '<cmd>bp<bar>sp<bar>bn<bar>bd<cr>')
+
+-- align by =
+map('x', '<leader>=', '<cmd>Align =<cr>')
+

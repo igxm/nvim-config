@@ -1,6 +1,6 @@
 local fn = vim.fn
 local install_path = fn.stdpath("data") .. "/site/pack/packer/start/packer.nvim"
-local compile_path = fn.stdpath('data') .. '/site/pack/packer/start/packer.nvim/plugin/packer.lua'
+local compile_path = fn.stdpath("data") .. "/site/pack/packer/start/packer.nvim/plugin/packer.lua"
 if fn.empty(fn.glob(install_path)) > 0 then
   fn.system({ "git", "clone", "--depth", "1", "https://github.com/wbthomason/packer.nvim", install_path })
   vim.cmd("packadd packer.nvim")
@@ -101,11 +101,13 @@ require("packer").startup({
     })
 
     use({
-      'windwp/nvim-autopairs',
+      "windwp/nvim-autopairs",
       config = function()
-        require('nvim-autopairs').setup({})
+        require("nvim-autopairs").setup({})
       end,
     })
+
+    use("RRethy/nvim-align")
 
     -- Show undo history visually
     use({
