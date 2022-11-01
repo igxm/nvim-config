@@ -20,3 +20,8 @@ vim.g.clipboard = {
     ["*"] = paste
   }
 }
+
+vim.g.oscyank_term = 'default'
+vim.cmd [[
+set clipboard+=unnamedplus
+]]
