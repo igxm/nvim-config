@@ -37,10 +37,7 @@ cmp.setup({
         fallback()
       end
     end,
-    ['<CR>'] = cmp.mapping.confirm({ behavior = cmp.ConfirmBehavior.Replace }),
-    --['<CR>'] = function(fallback)
-    --    fallback()
-    --end,
+    ['<CR>'] = cmp.mapping.confirm({ select = true }),
     ['<C-e>'] = function(fallback)
       fallback()
     end,
