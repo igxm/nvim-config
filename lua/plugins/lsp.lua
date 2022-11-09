@@ -57,7 +57,6 @@ vim.diagnostic.config({
   severity_sort = true,
 })
 
-require('lsp_signature').setup()
 require('lsp-colors').setup()
 
 local border = { '╭', '─', '╮', '│', '╯', '─', '╰', '│' }

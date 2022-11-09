@@ -252,7 +252,6 @@ require("packer").startup({
         "williamboman/mason-lspconfig.nvim",
         "folke/lsp-colors.nvim",
         "folke/lua-dev.nvim",
-        "ray-x/lsp_signature.nvim",
       },
       config = function()
         require("plugins.lsp")
