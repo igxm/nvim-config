@@ -3,7 +3,7 @@ local null_ls = require("null-ls")
 null_ls.setup({
     sources = {
         null_ls.builtins.formatting.gofmt,
-        null_ls.builtins.formatting.lua_format,
+        null_ls.builtins.formatting.stylua,
     },
     on_attach = function(client, bufnr)
         if client.supports_method("textDocument/formatting") then
@@ -26,9 +26,7 @@ null_ls.setup({
 })
 
 require("mason-null-ls").setup({
-    ensure_installed = {
-        "luaformatter",
-    },
+    ensure_installed = nil,
     automatic_installation = true,
-    automatic_setup = false,
+    automatic_setup = true,
 })

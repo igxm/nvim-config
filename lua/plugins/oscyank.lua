@@ -4,8 +4,8 @@ end
 
 local function paste()
     return {
-        vim.fn.split(vim.fn.getreg(''), '\n'),
-        vim.fn.getregtype(''),
+        vim.fn.split(vim.fn.getreg(""), "\n"),
+        vim.fn.getregtype(""),
     }
 end
 
@@ -21,7 +21,7 @@ vim.g.clipboard = {
     },
 }
 
-vim.g.oscyank_term = 'default'
-vim.cmd [[
+vim.g.oscyank_term = "default"
+vim.cmd([[
 set clipboard+=unnamedplus
-]]
+]])

@@ -155,13 +155,22 @@ require("packer").startup({
             },
         })
 
+        use({
+            "williamboman/mason.nvim",
+            config = function()
+                require("mason").setup()
+            end,
+        })
+
         -- auto format
         use({
             "jayp0521/mason-null-ls.nvim",
             requires = {
-                "jose-elias-alvarez/null-ls.nvim",
                 "nvim-lua/plenary.nvim",
-                "williamboman/mason.nvim",
+                "jose-elias-alvarez/null-ls.nvim",
+            },
+            after = {
+                "mason.nvim",
             },
             config = [[require("plugins.null-ls")]],
         })
@@ -236,17 +245,6 @@ require("packer").startup({
             })
         end
 
-        -- Autosave files on certain events
-        use({
-            "Pocco81/auto-save.nvim",
-            event = "VimEnter",
-            config = function()
-                vim.defer_fn(function()
-                    require("plugins.autosave")
-                end, 1500)
-            end,
-        })
-
         -- The missing auto-completion for cmdline!
         use({
             "gelguy/wilder.nvim",
@@ -306,6 +304,7 @@ require("packer").startup({
 
         use({
             "junnplus/lsp-setup.nvim",
+            after = "mason.nvim",
             requires = {
                 "neovim/nvim-lspconfig",
                 "williamboman/mason.nvim",

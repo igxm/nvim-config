@@ -1,9 +1,9 @@
-local map = require('utils').map
+local map = require("utils").map
 
-map('n', '<leader>t', function()
-    local view = require "nvim-tree.view"
+map("n", "<leader>t", function()
+    local view = require("nvim-tree.view")
     view.close()
-    return require('nvim-tree').open(vim.fn.expand('%:p:h'))
+    return require("nvim-tree").open(vim.fn.expand("%:p:h"))
 end, {
     desc = "toggle nvim-tree",
 })

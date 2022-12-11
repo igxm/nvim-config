@@ -1,5 +1,7 @@
 local function spell()
-    if vim.o.spell then return string.format("[SPELL]") end
+    if vim.o.spell then
+        return string.format("[SPELL]")
+    end
 
     return ""
 end
@@ -7,8 +9,10 @@ end
 local function ime_state()
     if vim.g.is_mac then
         -- ref: https://github.com/vim-airline/vim-airline/blob/master/autoload/airline/extensions/xkblayout.vim#L11
-        local layout = vim.fn.libcall(vim.g.XkbSwitchLib, 'Xkb_Switch_getXkbLayout', '')
-        if layout == '0' then return '[CN]' end
+        local layout = vim.fn.libcall(vim.g.XkbSwitchLib, "Xkb_Switch_getXkbLayout", "")
+        if layout == "0" then
+            return "[CN]"
+        end
     end
 
     return ""
@@ -31,16 +35,20 @@ end
 local function mixed_indent()
     local space_pat = [[\v^ +]]
     local tab_pat = [[\v^\t+]]
-    local space_indent = vim.fn.search(space_pat, 'nwc')
-    local tab_indent = vim.fn.search(tab_pat, 'nwc')
+    local space_indent = vim.fn.search(space_pat, "nwc")
+    local tab_indent = vim.fn.search(tab_pat, "nwc")
     local mixed = (space_indent > 0 and tab_indent > 0)
     local mixed_same_line
     if not mixed then
-        mixed_same_line = vim.fn.search([[\v^(\t+ | +\t)]], 'nwc')
+        mixed_same_line = vim.fn.search([[\v^(\t+ | +\t)]], "nwc")
         mixed = mixed_same_line > 0
     end
-    if not mixed then return '' end
-    if mixed_same_line ~= nil and mixed_same_line > 0 then return 'MI:' .. mixed_same_line end
+    if not mixed then
+        return ""
+    end
+    if mixed_same_line ~= nil and mixed_same_line > 0 then
+        return "MI:" .. mixed_same_line
+    end
     local space_indent_cnt = vim.fn.searchcount({
         pattern = space_pat,
         max_count = 1e3,
@@ -50,9 +58,9 @@ local function mixed_indent()
         max_count = 1e3,
     }).total
     if space_indent_cnt > tab_indent_cnt then
-        return 'MI:' .. tab_indent
+        return "MI:" .. tab_indent
     else
-        return 'MI:' .. space_indent
+        return "MI:" .. space_indent
     end
 end
 
@@ -83,15 +91,15 @@ require("lualine").setup({
             {
                 ime_state,
                 color = {
-                    fg = 'black',
-                    bg = '#f46868',
+                    fg = "black",
+                    bg = "#f46868",
                 },
             },
             {
                 spell,
                 color = {
-                    fg = 'black',
-                    bg = '#a7c080',
+                    fg = "black",
+                    bg = "#a7c080",
                 },
             },
         },
@@ -142,8 +150,8 @@ require("lualine").setup({
     },
     tabline = {},
     extensions = {
-        'quickfix',
-        'fugitive',
-        'nvim-tree',
+        "quickfix",
+        "fugitive",
+        "nvim-tree",
     },
 })

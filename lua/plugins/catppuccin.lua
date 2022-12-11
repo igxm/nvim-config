@@ -1,5 +1,5 @@
 vim.g.catppuccin_flavour = "latte" -- latte, frappe, macchiato, mocha
-require("catppuccin").setup {
+require("catppuccin").setup({
     integrations = {
         notify = true,
         nvimtree = true,
@@ -37,5 +37,5 @@ require("catppuccin").setup {
             },
         },
     },
-}
-vim.api.nvim_command "colorscheme catppuccin"
+})
+vim.api.nvim_command("colorscheme catppuccin")

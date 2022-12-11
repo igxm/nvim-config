@@ -1,4 +1,4 @@
-local util = require "lspconfig/util"
+local util = require("lspconfig/util")
 
 local settings = {
     -- Default mappings
@@ -17,10 +17,9 @@ local settings = {
     -- [']d'] = 'lua vim.diagnostic.goto_next()',
     default_mappings = true,
     mappings = {
-        ["<C-]>"] = 'lua vim.lsp.buf.definition()',
+        ["<C-]>"] = "lua vim.lsp.buf.definition()",
     },
-    on_attach = function(client, bufnr)
-    end,
+    on_attach = function(client, bufnr) end,
     servers = {
         eslint = {},
         pylsp = {},
@@ -54,7 +53,7 @@ local settings = {
     },
 }
 
-require('lsp-setup').setup(settings)
+require("lsp-setup").setup(settings)
 
 -- global config for diagnostic
 vim.diagnostic.config({
@@ -64,21 +63,21 @@ vim.diagnostic.config({
     severity_sort = true,
 })
 
-require('lsp-colors').setup()
+require("lsp-colors").setup()
 
 local border = {
-    '╭',
-    '─',
-    '╮',
-    '│',
-    '╯',
-    '─',
-    '╰',
-    '│',
+    "╭",
+    "─",
+    "╮",
+    "│",
+    "╯",
+    "─",
+    "╰",
+    "│",
 }
-vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(vim.lsp.handlers.hover, {
+vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
     border = border,
 })
-vim.lsp.handlers['textDocument/signatureHelp'] = vim.lsp.with(vim.lsp.handlers.signature_help, {
+vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, {
     border = border,
 })

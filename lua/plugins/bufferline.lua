@@ -1,18 +1,18 @@
-local map = require('utils').map
+local map = require("utils").map
 
-map('n', '<C-h>', '<Cmd>BufferLineCyclePrev<CR>')
-map('n', '<C-l>', '<Cmd>BufferLineCycleNext<CR>')
+map("n", "<C-h>", "<Cmd>BufferLineCyclePrev<CR>")
+map("n", "<C-l>", "<Cmd>BufferLineCycleNext<CR>")
 
-require('bufferline').setup {
-    highlights = require("catppuccin.groups.integrations.bufferline").get {
+require("bufferline").setup({
+    highlights = require("catppuccin.groups.integrations.bufferline").get({
         styles = {
             "bold",
         },
-    },
+    }),
     options = {
         mode = "buffers", -- set to "tabs" to only show tabpages instead
         numbers = function(opts)
-            return string.format('%s', opts.raise(opts.ordinal))
+            return string.format("%s", opts.raise(opts.ordinal))
         end,
         close_command = nil, -- can be a string | function, see "Mouse actions"
         right_mouse_command = nil, -- can be a string | function, see "Mouse actions"
@@ -22,13 +22,13 @@ require('bufferline').setup {
         -- and so changing this is NOT recommended, this is intended
         -- as an escape hatch for people who cannot bear it for whatever reason
         indicator = {
-            icon = '',
+            icon = "",
         },
-        buffer_close_icon = '',
-        modified_icon = '●',
-        close_icon = '',
-        left_trunc_marker = '',
-        right_trunc_marker = '',
+        buffer_close_icon = "",
+        modified_icon = "●",
+        close_icon = "",
+        left_trunc_marker = "",
+        right_trunc_marker = "",
         max_name_length = 18,
         max_prefix_length = 15, -- prefix used when a buffer is de-duplicated
         tab_size = 18,
@@ -56,7 +56,7 @@ require('bufferline').setup {
         separator_style = "thin",
         enforce_regular_tabs = false,
         always_show_bufferline = true,
-        sort_by = 'id',
+        sort_by = "id",
         custom_filter = function(bufnr)
             -- if the result is false, this buffer will be shown, otherwise, this
             -- buffer will be hidden.
@@ -70,9 +70,11 @@ require('bufferline').setup {
             local cur_ft = vim.bo[bufnr].filetype
             local should_filter = vim.tbl_contains(exclude_ft, cur_ft)
 
-            if should_filter then return false end
+            if should_filter then
+                return false
+            end
 
             return true
         end,
     },
-}
+})

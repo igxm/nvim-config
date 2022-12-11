@@ -1,13 +1,13 @@
 local ncmd = vim.api.nvim_command
 
-require('nvim-treesitter.configs').setup({
+require("nvim-treesitter.configs").setup({
     ensure_installed = {
-        'c',
-        'lua',
-        'go',
-        'python',
-        'markdown',
-        'jsonnet',
+        "c",
+        "lua",
+        "go",
+        "python",
+        "markdown",
+        "jsonnet",
     },
     highlight = {
         enable = true,
@@ -19,8 +19,8 @@ require('nvim-treesitter.configs').setup({
         enable = true,
         use_virtual_text = true,
         lint_events = {
-            'BufWrite',
-            'CursorHold',
+            "BufWrite",
+            "CursorHold",
         },
     },
     indent = {
@@ -58,5 +58,5 @@ require('nvim-treesitter.configs').setup({
         enable = false,
     },
 })
-ncmd('set foldmethod=expr')
-ncmd('set foldexpr=nvim_treesitter#foldexpr()')
+ncmd("set foldmethod=expr")
+ncmd("set foldexpr=nvim_treesitter#foldexpr()")

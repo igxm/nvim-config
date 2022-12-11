@@ -1,9 +1,9 @@
 -- Color scheme
 vim.o.termguicolors = true
 
-vim.o.encoding = 'utf-8'
-vim.o.fileencoding = 'utf-8'
-vim.o.fencs = 'utf-8,ucs-bom,shift-jis,gb18030,gbk,gb2312,cp936'
+vim.o.encoding = "utf-8"
+vim.o.fileencoding = "utf-8"
+vim.o.fencs = "utf-8,ucs-bom,shift-jis,gb18030,gbk,gb2312,cp936"
 vim.o.hidden = true
 vim.o.wildmenu = true
 vim.o.hlsearch = true
@@ -23,20 +23,20 @@ vim.o.swapfile = false
 vim.o.foldenable = false
 vim.o.autoread = true
 vim.o.autowrite = true
-vim.o.mouse = 'a'
+vim.o.mouse = "a"
 
 vim.o.number = true
 vim.o.cursorline = true
 vim.o.relativenumber = false
 vim.o.cursorcolumn = true
-vim.o.signcolumn = 'auto:2'
+vim.o.signcolumn = "auto:2"
 -- vim.o.cmdheight = 0
 vim.opt.list = true
 vim.opt.listchars = {
-    tab = '▸ ',
-    extends = '❯',
-    precedes = '❮',
-    nbsp = '␣',
+    tab = "▸ ",
+    extends = "❯",
+    precedes = "❮",
+    nbsp = "␣",
 }
 
 vim.o.textwidth = 120
@@ -47,15 +47,15 @@ vim.o.shiftwidth = 4
 vim.o.softtabstop = 4
 vim.o.tabstop = 4
 
-vim.api.nvim_create_augroup('Init', {
+vim.api.nvim_create_augroup("Init", {
     clear = true,
 })
 -- highlight yanked text briefly
-vim.api.nvim_create_autocmd('TextYankPost', {
-    group = 'Init',
+vim.api.nvim_create_autocmd("TextYankPost", {
+    group = "Init",
     callback = function()
         vim.highlight.on_yank({
-            higroup = 'IncSearch',
+            higroup = "IncSearch",
             timeout = 250,
             on_visual = true,
         })
@@ -63,12 +63,12 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 })
 
 -- reopen last position
-vim.api.nvim_create_autocmd('BufReadPost', {
-    group = 'Init',
+vim.api.nvim_create_autocmd("BufReadPost", {
+    group = "Init",
     callback = function()
         local previous_pos = vim.api.nvim_buf_get_mark(0, '"')[1]
         local last_line = vim.api.nvim_buf_line_count(0)
-        if previous_pos >= 1 and previous_pos <= last_line and vim.bo.filetype ~= 'commit' then
+        if previous_pos >= 1 and previous_pos <= last_line and vim.bo.filetype ~= "commit" then
             vim.cmd('normal! g`"')
         end
     end,
