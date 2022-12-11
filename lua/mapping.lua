@@ -18,8 +18,9 @@ map('n', '<leader>v', '<Cmd>Vista!!<CR>')
 map('x', 'p', '"_c<ESC>p')
 
 -- close all plugin window
-map('', '<C-C><C-C>', function() utils.close_plugin_window() end)
+map('', '<C-C><C-C>', function()
+    utils.close_plugin_window()
+end)
 
 -- close current buffer
 map('', '<C-q>', '<cmd>bp<bar>sp<bar>bn<bar>bd<cr>')
-
