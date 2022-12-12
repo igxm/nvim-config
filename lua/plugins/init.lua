@@ -27,6 +27,15 @@ require("packer").startup({
 
         use("wbthomason/packer.nvim")
 
+        -- tabline
+        use({
+            "akinsho/bufferline.nvim",
+            requires = {
+                "kyazdani42/nvim-web-devicons",
+            },
+            config = [[require("plugins.bufferline")]],
+        })
+
         use({
             "catppuccin/nvim",
             config = [[require("plugins.catppuccin")]],
@@ -275,16 +284,6 @@ require("packer").startup({
                 "kyazdani42/nvim-web-devicons", -- optional, for file icon
             },
             config = [[require("plugins.nvim-tree")]],
-        })
-
-        -- tabline
-        use({
-            "akinsho/bufferline.nvim",
-            requires = {
-                "catppuccin/nvim",
-                "kyazdani42/nvim-web-devicons",
-            },
-            config = [[require("plugins.bufferline")]],
         })
 
         use({
