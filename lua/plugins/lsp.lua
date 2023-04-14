@@ -49,7 +49,6 @@ local settings = {
             },
         },
         clangd = {},
-        sumneko_lua = {},
     },
 }
 
