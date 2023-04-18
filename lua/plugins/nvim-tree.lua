@@ -1,9 +1,11 @@
 local map = require("utils").map
 
 map("n", "<leader>t", function()
-    local view = require("nvim-tree.view")
-    view.close()
-    return require("nvim-tree").open(vim.fn.expand("%:p:h"))
+    local api = require("nvim-tree.api")
+    api.tree.close()
+	api.tree.open({
+		path = vim.fn.expand("%:p:h"),
+	})
 end, {
     desc = "toggle nvim-tree",
 })
@@ -114,18 +116,30 @@ local mappings_list = {
     },
 }
 
+local function on_attach(bufnr)
+  local api = require('nvim-tree.api')
+
+  local function opts(desc)
+    return { desc = 'nvim-tree: ' .. desc, buffer = bufnr, noremap = true, silent = true, nowait = true }
+  end
+
+  api.config.mappings.default_on_attach(bufnr)
+
+	vim.keymap.set('n', 'u',     api.tree.change_root_to_parent,        opts('Up'))
+	vim.keymap.set('n', 'p',     api.node.navigate.parent,              opts('Parent Directory'))
+
+end
+
 nvim_tree.setup({
     auto_reload_on_write = true,
     disable_netrw = false,
     hijack_cursor = false,
     hijack_netrw = true,
     hijack_unnamed_buffer_when_opening = false,
-    ignore_buffer_on_setup = false,
-    open_on_setup = false,
-    open_on_setup_file = false,
     open_on_tab = false,
     sort_by = "name",
     update_cwd = false,
+	on_attach = on_attach,
     view = {
         width = 30,
         hide_root_folder = false,
@@ -134,10 +148,6 @@ nvim_tree.setup({
         number = false,
         relativenumber = false,
         signcolumn = "yes",
-        mappings = {
-            custom_only = false,
-            list = mappings_list,
-        },
     },
     renderer = {
         indent_markers = {
@@ -161,7 +171,6 @@ nvim_tree.setup({
         update_cwd = false,
         ignore_list = {},
     },
-    ignore_ft_on_setup = {},
     system_open = {
         cmd = "",
         args = {},
