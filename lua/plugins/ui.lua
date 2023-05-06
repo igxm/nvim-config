@@ -16,6 +16,10 @@ return {
 	-- add more treesitter parsers
 	{
 		"nvim-treesitter/nvim-treesitter",
+		dependencies = {
+			"nvim-treesitter/nvim-treesitter-textobjects",
+			"nvim-treesitter/nvim-treesitter-context",
+		},
 		opts = {
 			ensure_installed = {
 				"bash",
