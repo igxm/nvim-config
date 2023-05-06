@@ -100,13 +100,7 @@ return {
 				show_buffer_close_icons = false,
 				show_tab_indicators = false,
 				persist_buffer_sort = true, -- whether or not custom sorted buffers should persist
-				diagnostics = "nvim_lsp",
-				diagnostics_indicator = function(_, _, diag)
-					local icons = require("lazyvim.config").icons.diagnostics
-					local ret = (diag.error and icons.Error .. diag.error .. " " or "")
-						.. (diag.warning and icons.Warn .. diag.warning or "")
-					return vim.trim(ret)
-				end,
+				diagnostics = "",
 				offsets = {
 					{
 						filetype = "NvimTree",
@@ -132,6 +126,18 @@ return {
 				component_separators = "",
 				disabled_filetypes = {},
 				always_divide_middle = true,
+			},
+			sections = {
+				lualine_c = {
+					{ "filetype", icon_only = true, separator = "", padding = { left = 1, right = 0 } },
+					{ "filename", path = 1, symbols = { modified = "  ", readonly = "", unnamed = "" } },
+					-- stylua: ignore
+					{
+						function() return require("nvim-navic").get_location() end,
+						cond = function() return package.loaded["nvim-navic"] and require("nvim-navic").is_available() end,
+					},
+				},
+				lualine_z = {'encoding'},
 			},
 			extensions = {
 				"quickfix",

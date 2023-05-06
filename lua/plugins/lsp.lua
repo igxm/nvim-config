@@ -33,16 +33,22 @@ return {
 		"neovim/nvim-lspconfig",
 		---@class PluginLspOpts
 		opts = {
+			diagnostics = {
+				underline = false,
+				virtual_text = false,
+				signs = false,
+				severity_sort = true,
+			},
 			mappings = {
 				["<C-]>"] = "lua vim.lsp.buf.definition()",
 			},
 			---@type lspconfig.options
 			servers = {
 				gopls = {},
-				--lua_ls = {
-				--	mason = false,
-				--	enabled = false
-				--},
+				lua_ls = {
+					mason = false,
+					enabled = false
+				},
 			},
 		},
 	}
