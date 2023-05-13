@@ -31,6 +31,11 @@ return {
 	-- add lspconfig
 	{
 		"neovim/nvim-lspconfig",
+		init = function()
+			local keys = require("lazyvim.plugins.lsp.keymaps").get()
+			keys[#keys + 1] = { "<C-]>", vim.lsp.buf.definition, desc = "Goto definition" }
+			keys[#keys + 1] = { "gr", function() require('telescope.builtin').lsp_references({jump_type='never'}) end, desc = "References" }
+		end,
 		---@class PluginLspOpts
 		opts = {
 			diagnostics = {
@@ -39,12 +44,14 @@ return {
 				signs = false,
 				severity_sort = true,
 			},
-			mappings = {
-				["<C-]>"] = "lua vim.lsp.buf.definition()",
-			},
 			---@type lspconfig.options
 			servers = {
-				gopls = {},
+				gopls = {
+					analyses = {
+                        unusedparams = true,
+                    },
+                    staticcheck = true,
+				},
 				lua_ls = {
 					mason = false,
 					enabled = false
