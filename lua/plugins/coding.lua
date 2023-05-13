@@ -100,8 +100,7 @@ return {
 			cmp.setup.cmdline('/', {
 				mapping = cmp.mapping.preset.cmdline(),
 				sources = {
-					-- { name = 'buffer' }
-					{ name = 'buffer', opts = { keyword_pattern = [=[[^[:blank:]].*]=] } }
+					{ name = 'buffer' }
 				}
 			})
 
