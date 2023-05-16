@@ -133,37 +133,15 @@ end
 
 -- 将字符串转换为驼峰命名
 function M.camel_case(str)
-    local function split(str, sep)
-        local fields = {}
-        local pattern = string.format("([^%s]+)", sep)
-        str:gsub(pattern, function(c) fields[#fields+1] = c end)
-        return fields
-    end
-
-    local str_arr = split(str, "_")
-
-    for i, v in ipairs(str_arr) do
-        str_arr[i] = string.gsub(v, "^%l", string.upper)
-    end
-
-    return table.concat(str_arr)
+	str = string.gsub(str, "^%l", string.upper)
+    str = string.gsub(str, "_(%w)", function(c) return string.upper(c) end)
+    return str
 end
 
 -- 将驼峰命名转换为下划线
 function M.snake_case(str)
-    local function split_camel(str)
-        local fields = {}
-        str:gsub("[^A-Z]*([A-Z]+[^A-Z]*)", function(c) fields[#fields+1] = c end)
-        return fields
-    end
-
-    local parts = split_camel(str)
-
-    for i, part in ipairs(parts) do
-        parts[i] = string.lower(part)
-    end
-
-    return table.concat(parts, "_")
+	str = string.gsub(str, "%u", function(c) return "_"..string.lower(c) end)
+    return string.sub(str, 2) -- 去掉开头的下划线
 end
 
 function M.select_convert_case()
