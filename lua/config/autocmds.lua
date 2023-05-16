@@ -9,3 +9,6 @@ vim.api.nvim_create_autocmd({ "FileType" }, {
     vim.b.autoformat = false
   end,
 })
+
+vim.cmd('command! ProfileStart lua require("util").profile(true)')
+vim.cmd('command! ProfileEnd lua require("util").profile(false)')

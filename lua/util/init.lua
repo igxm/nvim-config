@@ -180,4 +180,16 @@ function M.goto_right_window()
 	end
 end
 
+function M.profile(flag)
+	local profile_log = vim.fn.expand('~/.cache/nvim/profile.log')
+	if flag then
+		vim.cmd('profile start ' .. profile_log)
+		vim.cmd('profile func *')
+		vim.cmd('profile file *')
+	else
+		vim.cmd('profile stop')
+		vim.cmd('edit ' .. profile_log)
+	end
+end
+
 return M
