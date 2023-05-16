@@ -11,6 +11,10 @@ opt.encoding = "utf-8"
 opt.fileencoding = "utf-8"
 opt.fencs = "utf-8,ucs-bom,shift-jis,gb18030,gbk,gb2312,cp936"
 
+opt.matchtime = 1
+opt.updatetime = 100
+opt.foldenable = false
+
 opt.number = true
 opt.relativenumber = false
 opt.cursorline = true
