@@ -5,51 +5,26 @@
 -- Leader key
 vim.g.mapleader = ","
 
--- Color scheme
-vim.o.termguicolors = true
+local opt = vim.opt
 
-vim.o.encoding = "utf-8"
-vim.o.fileencoding = "utf-8"
-vim.o.fencs = "utf-8,ucs-bom,shift-jis,gb18030,gbk,gb2312,cp936"
-vim.o.hidden = true
-vim.o.wildmenu = true
-vim.o.hlsearch = true
-vim.o.incsearch = true
-vim.o.matchtime = 1
-vim.o.showmatch = true
-vim.o.updatetime = 100
-vim.o.ignorecase = true
-vim.o.smarttab = true
-vim.o.expandtab = true
-vim.o.ruler = true
-vim.o.history = 500
-vim.o.backup = false
-vim.o.swapfile = false
-vim.o.foldenable = false
-vim.o.autoread = true
-vim.o.autowrite = true
-vim.o.mouse = "a"
+opt.encoding = "utf-8"
+opt.fileencoding = "utf-8"
+opt.fencs = "utf-8,ucs-bom,shift-jis,gb18030,gbk,gb2312,cp936"
 
-vim.o.number = true
-vim.o.cursorline = true
-vim.o.relativenumber = false
-vim.o.cursorcolumn = true
--- vim.o.cmdheight = 0
-vim.opt.list = true
-vim.opt.listchars = {
-	tab = "▸ ",
-	extends = "❯",
-	precedes = "❮",
-	nbsp = "␣",
-}
+opt.number = true
+opt.relativenumber = false
+opt.cursorline = true
+opt.cursorcolumn = true
 
-vim.o.textwidth = 120
-vim.o.smartindent = true
-vim.o.autoindent = true
-vim.o.cindent = true
-vim.o.shiftwidth = 4
-vim.o.softtabstop = 4
-vim.o.tabstop = 4
+opt.smarttab = true
+opt.expandtab = true
+opt.smartindent = true
+opt.autoindent = true
+opt.cindent = true
+opt.shiftwidth = 4
+opt.softtabstop = 4
+opt.tabstop = 4
+opt.textwidth = 120
 
 -- filetype
 local cmd = vim.cmd
