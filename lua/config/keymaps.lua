@@ -19,17 +19,6 @@ map("x", "p", '"_c<ESC>p')
 -- close current buffer
 map("", "<C-q>", "<cmd>bp<bar>sp<bar>bn<bar>bd<cr>")
 
--- toggle tree
-map("n", "<leader>t", function()
-	local api = require("nvim-tree.api")
-	api.tree.close()
-	api.tree.open({
-		path = vim.fn.expand("%:p:h"),
-	})
-end, {
-	desc = "Toggle nvim-tree",
-})
-
 -- close all plugin window
 map("", "<C-C><C-C>", util.close_plugin_window, { desc = "Close all plugin windows" })
 

@@ -4,7 +4,6 @@ return {
 	{ "JoosepAlviste/nvim-ts-context-commentstring", enabled = false },
 	{ "echasnovski/mini.comment",                    enabled = false },
 	{ "echasnovski/mini.ai",                         enabled = false },
-	{ "nvim-neo-tree/neo-tree.nvim",                 enabled = false },
 	{ "windwp/nvim-spectre",                         enabled = false },
 	{ "ggandor/flit.nvim",                           enabled = false },
 	{ "ggandor/leap.nvim",                           enabled = false },

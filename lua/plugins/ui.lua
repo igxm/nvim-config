@@ -48,30 +48,35 @@ return {
 		},
 	},
 
-	-- tree
+	-- file tree
 	{
-		"nvim-tree/nvim-tree.lua",
-		dependencies = {
-			"nvim-tree/nvim-web-devicons",
-		},
+		"nvim-neo-tree/neo-tree.nvim",
+		keys = function()
+			return {
+				{
+					"<leader>t",
+					function()
+						require("neo-tree.command").execute({ toggle = true, dir = vim.fn.expand("%:p:h") })
+					end,
+					desc = "Explorer NeoTree (cwd)"
+				},
+			}
+		end,
 		opts = {
-			hijack_netrw = true,
-			hijack_directories = {
-				enable = true,
-				auto_open = true,
-			},
-			on_attach = function(bufnr)
-				local api = require("nvim-tree.api")
-
-				local function opts(desc)
-					return { desc = "nvim-tree: " .. desc, buffer = bufnr, noremap = true, silent = true, nowait = true }
-				end
-
-				api.config.mappings.default_on_attach(bufnr)
-
-				vim.keymap.set("n", "u", api.tree.change_root_to_parent, opts("Up"))
-				vim.keymap.set("n", "p", api.node.navigate.parent, opts("Parent Directory"))
-			end,
+			enable_diagnostics = false,
+			filesystem = {
+				window = {
+					mappings = {
+						["<space>"] = "none",
+						["t"] = "none",
+						["p"] = function (state)
+							local node = state.tree:get_node()
+							require("neo-tree.ui.renderer").focus_node(state, node:get_parent_id())
+						end,
+						["u"] = "navigate_up",
+					}
+				}
+			}
 		},
 	},
 
@@ -107,7 +112,7 @@ return {
 				diagnostics = "",
 				offsets = {
 					{
-						filetype = "NvimTree",
+						filetype = "neo-tree",
 						text = "File Explorer",
 						text_align = "left",
 					},
