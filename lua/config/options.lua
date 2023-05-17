@@ -14,6 +14,10 @@ opt.fencs = "utf-8,ucs-bom,shift-jis,gb18030,gbk,gb2312,cp936"
 opt.matchtime = 1
 opt.updatetime = 100
 opt.foldenable = false
+opt.swapfile = false
+opt.backup = false
+opt.autoread = true
+opt.autowrite = true
 
 opt.number = true
 opt.relativenumber = false
