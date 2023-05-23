@@ -25,6 +25,28 @@ return {
 				layout_config = { prompt_position = "top" },
 				sorting_strategy = "ascending",
 				winblend = 0,
+				vimgrep_arguments = {
+					'rg',
+					'--color=never',
+					'--no-heading',
+					'--with-filename',
+					'--line-number',
+					'--column',
+					'--smart-case',
+					'-u',
+				},
+			},
+			pickers = {
+				find_files = {
+					find_command = {
+						'rg',
+						'--files',
+						'--color',
+						'never',
+						'--no-require-git',
+						'-u',
+					}
+				}
 			},
 		},
 	},
