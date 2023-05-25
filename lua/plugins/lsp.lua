@@ -48,9 +48,14 @@ return {
 			servers = {
 				gopls = {
 					analyses = {
-                        unusedparams = true,
+						nilness = false,
+						shadow = false,
+						unusedparams = false,
+						unusewrites = false,
                     },
-                    staticcheck = true,
+                    staticcheck = false,
+					usePlaceholders = true,
+					cmd = { "gopls", "-remote=auto" },
 				},
 				lua_ls = {
 					mason = false,
