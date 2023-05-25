@@ -21,6 +21,7 @@ return {
 		},
 		opts = {
 			defaults = {
+				file_ignore_patterns = { "logs/.*", "log/.*" },
 				layout_strategy = "horizontal",
 				layout_config = { prompt_position = "top" },
 				sorting_strategy = "ascending",
