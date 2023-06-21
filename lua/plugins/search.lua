@@ -28,6 +28,8 @@ return {
 				winblend = 0,
 				vimgrep_arguments = {
 					'rg',
+					[[--glob=!*.pb.go]],
+					[[--glob=!*protoop.go]],
 					'--color=never',
 					'--no-heading',
 					'--with-filename',
