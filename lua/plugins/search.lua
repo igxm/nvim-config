@@ -30,6 +30,8 @@ return {
 					'rg',
 					[[--glob=!*.pb.go]],
 					[[--glob=!*protoop.go]],
+					[[--glob=!*base_redisop.go]],
+					[[--glob=!*redismsg_redisop.go]],
 					'--color=never',
 					'--no-heading',
 					'--with-filename',
