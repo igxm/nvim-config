@@ -56,6 +56,12 @@ return {
                     staticcheck = false,
 					usePlaceholders = true,
 					cmd = { "gopls", "-remote=auto" },
+					directoryFilters = {
+						"-**/node_modules",
+						"-**/github.com",
+						"-**/golang.org",
+						"-**/google.golang.org",
+					},
 				},
 				lua_ls = {
 					mason = false,
