@@ -47,21 +47,6 @@ return {
 			---@type lspconfig.options
 			servers = {
 				gopls = {
-					analyses = {
-						nilness = false,
-						shadow = false,
-						unusedparams = false,
-						unusewrites = false,
-                    },
-                    staticcheck = false,
-					usePlaceholders = true,
-					cmd = { "gopls", "-remote=auto" },
-					directoryFilters = {
-						"-**/node_modules",
-						"-**/github.com",
-						"-**/golang.org",
-						"-**/google.golang.org",
-					},
 				},
 				lua_ls = {
 					mason = false,

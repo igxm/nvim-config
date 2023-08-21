@@ -28,6 +28,8 @@ return {
 				winblend = 0,
 				vimgrep_arguments = {
 					'rg',
+					[[--glob=!**/logs/**]],
+					[[--glob=!**/log/**]],
 					[[--glob=!*.pb.go]],
 					[[--glob=!*protoop.go]],
 					[[--glob=!*base_redisop.go]],
