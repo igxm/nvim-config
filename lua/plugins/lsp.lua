@@ -48,7 +48,7 @@ return {
 			---@type lspconfig.options
 			servers = {
 				gopls = {
-					memoryMode = "DegradeClosed",
+					--memoryMode = "DegradeClosed",
 				},
 				lua_ls = {
 					mason = false,
