@@ -1,30 +1,30 @@
 return {
 	-- formatters
 	{
-		"jose-elias-alvarez/null-ls.nvim",
-		event = { "BufReadPre", "BufNewFile" },
+		"stevearc/conform.nvim",
 		dependencies = { "mason.nvim" },
-		opts = function()
-			local nls = require("null-ls")
-			return {
-				root_dir = require("null-ls.utils").root_pattern(".null-ls-root", ".neoconf.json", "Makefile", ".git"),
-				sources = {
-					nls.builtins.formatting.gofmt,
-					-- nls.builtins.formatting.fish_indent,
-					-- nls.builtins.diagnostics.fish,
-					-- nls.builtins.formatting.stylua,
-					-- nls.builtins.formatting.shfmt,
-					-- nls.builtins.diagnostics.flake8,
-				},
-			}
-		end,
+		opts = {
+			format = {
+				timeout_ms = 3000,
+				async = false, -- not recommended to change
+				quiet = false, -- not recommended to change
+			},
+			formatters_by_ft = {
+				lua = { "stylua" },
+				python = { "black" },
+				sh = { "shfmt" },
+				go = { "gofmt" },
+			},
+		},
 	},
 
 	{
 		"williamboman/mason.nvim",
 		opts = {
 			ensure_installed = {
-				--"stylua",
+				"stylua",
+				"black",
+				"shfmt",
 			},
 		},
 	},

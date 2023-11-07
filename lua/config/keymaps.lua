@@ -44,15 +44,6 @@ map("n", "N", "'nN'[v:searchforward]", { expr = true, desc = "Prev search result
 map("x", "N", "'nN'[v:searchforward]", { expr = true, desc = "Prev search result" })
 map("o", "N", "'nN'[v:searchforward]", { expr = true, desc = "Prev search result" })
 
-
-local telescope = require('telescope.builtin')
-map("", "<C-p>", telescope.find_files, { desc = "Find files" })
-map("", '<leader>g', telescope.grep_string, { desc = "Word (root dir)" })
-map("v", 'gs', function()
-	local text = util.get_visual_selection()
-	telescope.live_grep { default_text = text }
-end, { desc = "Search select string" })
-
 -- 转换选中字符串，然后写入粘贴板
 map("v", '<leader>y', function()
 	local ret = util.select_convert_case()

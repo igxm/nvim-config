@@ -10,13 +10,25 @@ return {
 		},
 		keys = {
 			{
-				"<leader>fp",
+				"<C-p>",
+				require("telescope.builtin").find_files,
+				desc = "Find File",
+			},
+			{
+				"<leader>g",
+				require("telescope.builtin").grep_string,
+				desc = "Word (root dir)" ,
+			},
+			{
+				"gs",
 				function()
-					require("telescope.builtin").find_files({
-						cwd = require("lazy.core.config").options.root,
-					})
+					local util = require("util")
+					local telescope = require('telescope.builtin')
+					local text = util.get_visual_selection()
+					telescope.live_grep { default_text = text }
 				end,
-				desc = "Find Plugin File",
+				mode = { "v" },
+				desc = "Search select string",
 			},
 		},
 		opts = {
