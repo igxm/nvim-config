@@ -28,10 +28,10 @@ map({ "i", "n" }, "<esc>", "<cmd>noh<cr><esc>", { desc = "Escape and clear hlsea
 -- Clear search, diff update and redraw
 -- taken from runtime/lua/_editor.lua
 map(
-	"n",
-	"<leader>ur",
-	"<Cmd>nohlsearch<Bar>diffupdate<Bar>normal! <C-L><CR>",
-	{ desc = "Redraw / clear hlsearch / diff update" }
+    "n",
+    "<leader>ur",
+    "<Cmd>nohlsearch<Bar>diffupdate<Bar>normal! <C-L><CR>",
+    { desc = "Redraw / clear hlsearch / diff update" }
 )
 
 map({ "n", "x" }, "gw", "*N", { desc = "Search word under cursor" })
@@ -45,11 +45,10 @@ map("x", "N", "'nN'[v:searchforward]", { expr = true, desc = "Prev search result
 map("o", "N", "'nN'[v:searchforward]", { expr = true, desc = "Prev search result" })
 
 -- 转换选中字符串，然后写入粘贴板
-map("v", '<leader>y', function()
-	local ret = util.select_convert_case()
-	vim.fn.setreg('+', ret)
-	vim.fn.setreg('"', ret)
-	 -- Exit visual mode.
-    vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes('<esc>', true, false, true), 'x', false)
+map("v", "<leader>y", function()
+    local ret = util.select_convert_case()
+    vim.fn.setreg("+", ret)
+    vim.fn.setreg('"', ret)
+    -- Exit visual mode.
+    vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<esc>", true, false, true), "x", false)
 end, { desc = "Convert select string" })
-

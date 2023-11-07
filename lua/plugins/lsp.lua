@@ -35,7 +35,13 @@ return {
 		init = function()
 			local keys = require("lazyvim.plugins.lsp.keymaps").get()
 			keys[#keys + 1] = { "<C-]>", vim.lsp.buf.definition, desc = "Goto definition" }
-			keys[#keys + 1] = { "gr", function() require('telescope.builtin').lsp_references({jump_type='never'}) end, desc = "References" }
+			keys[#keys + 1] = {
+				"gr",
+				function()
+					require("telescope.builtin").lsp_references({ jump_type = "never" })
+				end,
+				desc = "References",
+			}
 		end,
 		---@class PluginLspOpts
 		opts = {
@@ -52,9 +58,9 @@ return {
 				},
 				lua_ls = {
 					mason = false,
-					enabled = false
+					enabled = false,
 				},
 			},
 		},
-	}
+	},
 }
