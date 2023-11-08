@@ -74,6 +74,7 @@ return {
                             require("neo-tree.ui.renderer").focus_node(state, node:get_parent_id())
                         end,
                         ["u"] = "navigate_up",
+						["/"] = "noop",
                     },
                 },
             },
