@@ -1,4 +1,6 @@
 return {
+	--[=[
+	--
 	{
 		"telescope.nvim",
 		dependencies = {
@@ -69,4 +71,5 @@ return {
 			},
 		},
 	},
+	--]=]
 }

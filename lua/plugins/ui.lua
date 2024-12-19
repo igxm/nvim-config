@@ -157,6 +157,8 @@ return {
         },
     },
 
+	--[[
+	--
     -- disable commond line
     {
         "folke/noice.nvim",
@@ -226,6 +228,7 @@ return {
             })
         end,
     },
+	--]]
 
     {
         "lewis6991/gitsigns.nvim",

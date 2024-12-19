@@ -34,6 +34,20 @@ opt.softtabstop = 4
 opt.tabstop = 4
 opt.textwidth = 120
 
+-- clipboard
+opt.clipboard = 'unnamedplus'
+vim.g.clipboard = {
+	name = 'OSC 52',
+	copy = {
+		['+'] = require('vim.ui.clipboard.osc52').copy('+'),
+		['*'] = require('vim.ui.clipboard.osc52').copy('*'),
+	},
+	paste = {
+		['+'] = require('vim.ui.clipboard.osc52').paste('+'),
+		['*'] = require('vim.ui.clipboard.osc52').paste('*'),
+	},
+}
+
 -- filetype
 local cmd = vim.cmd
 local ncmd = vim.api.nvim_command
@@ -49,3 +63,4 @@ cmd([[ autocmd FileType javascript,javascript.jsx,typescript setlocal tabstop=2 
 cmd([[ autocmd FileType NvimTree setlocal tabstop=2 shiftwidth=2 softtabstop=2 textwidth=0 ]])
 cmd([[ autocmd BufNewFile,BufRead *.proto setfiletype proto ]])
 cmd([[ autocmd FileType proto setlocal shiftwidth=4 expandtab ]])
+

@@ -7,6 +7,8 @@ return {
         "kazhala/close-buffers.nvim",
     },
 
+	--[[
+	--
     -- setup cmp
     {
         "hrsh7th/nvim-cmp",
@@ -93,4 +95,5 @@ return {
 			})
 		end,
     },
+	--]]
 }
